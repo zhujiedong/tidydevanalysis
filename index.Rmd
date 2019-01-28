@@ -1,0 +1,31 @@
+--- 
+title: "使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据"
+subtitle: <h5>--使用 tidyverse 的方式</h5>
+author: "祝介东<br /> <br /> 北京力高泰科技有限公司"
+affiliation: "北京力高泰科技有限公司"
+date: "`r Sys.Date()`"
+documentclass: krantz
+bibliography: photoR.bib
+biblio-style: apalike
+link-citations: yes
+colorlinks: yes
+lot: yes
+lof: yes
+site: bookdown::bookdown_site
+description: "使用 R 语言分析 LI-6400XT 与 LI-6800 数据"
+github-repo: zhujiedong/photoanalysis
+graphics: yes
+cover-image: images/coverpage.png
+---
+
+# 欢迎 {- #welcome}
+
+------
+
+```{asis, echo=identical(knitr:::pandoc_to(), 'html')}
+**Note**: 本文内容仅为我 github 中相关repo (tidyphotoanalysis) 的在线预览版本，并不保证及时更新。
+
+<p style="text-align: center;"><img src="images/coverpage.png" /></p>
+```
+
+本文同样纯属个人打发出差漫漫长夜的作品，并非正式资料，只不过尽量使用了 tidyverse 的方式进行，之前的文章参考 [photoanalysis](https://zhujiedong.github.io/photoanalysis/)。

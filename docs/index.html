@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据</title>
+  <meta name="description" content="使用 R 语言分析 LI-6400XT 与 LI-6800 数据">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:image" content="images/coverpage.png" />
+  <meta property="og:description" content="使用 R 语言分析 LI-6400XT 与 LI-6800 数据" />
+  <meta name="github-repo" content="zhujiedong/photoanalysis" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据" />
+  
+  <meta name="twitter:description" content="使用 R 语言分析 LI-6400XT 与 LI-6800 数据" />
+  <meta name="twitter:image" content="images/coverpage.png" />
+
+<meta name="author" content="祝介东    北京力高泰科技有限公司">
+
+
+<meta name="date" content="2019-01-28">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+
+<link rel="next" href="references.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="css\style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R 软件与光合数据分析</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>欢迎</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>参考文献</a></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="blank">由 bookdown 驱动</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">使用 R 语言分析 LI-6400 和 LI-6800 光合仪的数据</h1>
+<h2 class="subtitle"><em><h5>
+–使用 tidyverse 的方式
+</h5></em></h2>
+<p class="author"><em>祝介东<br /> <br /> 北京力高泰科技有限公司</em></p>
+<p class="date"><em>2019-01-28</em></p>
+</div>
+<div id="welcome" class="section level1 unnumbered">
+<h1>欢迎</h1>
+<hr />
+<p><strong>Note</strong>: 本文内容仅为我 github 中相关repo (tidyphotoanalysis) 的在线预览版本，并不保证及时更新。</p>
+<p style="text-align: center;">
+<img src="images/coverpage.png" />
+</p>
+<p>本文同样纯属个人打发出差漫漫长夜的作品，并非正式资料，只不过尽量使用了 tidyverse 的方式进行，之前的文章参考 <a href="https://zhujiedong.github.io/photoanalysis/">photoanalysis</a>。</p>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="references.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/zhujiedong/tidyphotoanalysis/blob/master/index.Rmd",
+"text": "缂栬緫"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["bookdown.pdf", "bookdown.epub"],
+"toc": {
+"collapse": "none"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
