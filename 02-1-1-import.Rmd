@@ -1,4 +1,6 @@
-# 数据的导入 {#readr}
+# (PART) Part II {-} 
+
+# 基本数据的导入 {#readr}
 
 基本的数据导入，tidyverse 中的核心包为`readr`，如果熟悉 `read.csv` 或其他相似的函数，那么使用 `readr` 包必然也没有障碍，那么我们先用同样的两种方式，导入相同的 csv 文件，观察其差别：
 
@@ -91,6 +93,8 @@ x
 
 * `parse_factor` 功能是创建分类变量，对于我们实验数据时用的非常多的。
 
-* `parse_datetime`, `parse_date`, `parse_time` 则是专门解析时间日期的
+* `parse_datetime`, `parse_date`, `parse_time` 则是专门解析时间日期的，也是最复杂的，例如常见的英美仪器试剂，ISO 时间以及 CR1000 所采用的 julia day 和 LI-6800 所采用的 unix time 或者叫做 POSIX time 或 Epoch Time。
+
+鉴于实际难度和我累了少打字的原则^[有时候我会把省掉的补充上，如果后面遇到不得不详细讲的内容时。]，我只介绍因子类和时间日期类：
 
 \cleardoublepage
