@@ -142,7 +142,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="part"><span><b>II Part II</b></span></li>
 <li class="chapter" data-level="3" data-path="readr.html"><a href="readr.html"><i class="fa fa-check"></i><b>3</b> 基本数据的导入</a><ul>
 <li class="chapter" data-level="3.1" data-path="readr.html"><a href="readr.html#attridiff"><i class="fa fa-check"></i><b>3.1</b> 属性的差别</a></li>
-<li class="chapter" data-level="3.2" data-path="readr.html"><a href="readr.html#parse-str"><i class="fa fa-check"></i><b>3.2</b> 数据类型的解析</a></li>
+<li class="chapter" data-level="3.2" data-path="readr.html"><a href="readr.html#parse-str"><i class="fa fa-check"></i><b>3.2</b> 数据类型的解析</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="readr.html"><a href="readr.html#factor-str"><i class="fa fa-check"></i><b>3.2.1</b> 因子类型</a></li>
+<li class="chapter" data-level="3.2.2" data-path="readr.html"><a href="readr.html#datetime"><i class="fa fa-check"></i><b>3.2.2</b> 时间与日期</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>参考文献</a></li>
 <li class="divider"></li>
@@ -400,9 +403,31 @@ tf<span class="op">$</span>Sepal.Leng</code></pre>
 <li><p><code>parse_factor</code> 功能是创建分类变量，对于我们实验数据时用的非常多的。</p></li>
 <li><p><code>parse_datetime</code>, <code>parse_date</code>, <code>parse_time</code> 则是专门解析时间日期的，也是最复杂的，例如常见的英美仪器试剂，ISO 时间以及 CR1000 所采用的 julia day 和 LI-6800 所采用的 unix time 或者叫做 POSIX time 或 Epoch Time。</p></li>
 </ul>
-<p>鉴于实际难度和我累了少打字的原则<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>，我只介绍因子类和时间日期类：</p>
+<p>鉴于实际难度和我累了少打字的原则<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>，后面我只介绍因子类和时间日期类.</p>
+<div id="factor-str" class="section level3">
+<h3><span class="header-section-number">3.2.1</span> 因子类型</h3>
+<p>因子是 R 中用来创建分类数据的，例如 <code>fitacis</code> 用来批量处理不同处理或小区的光合数据，group 参数用的就是 factor 类型，当然，dataframe 格式自动帮我们完成了从 character 到 factor 的转换。当然，需要注意，factor 是有不同水平的，如同我们实验有处理，处理也要分不同的水平，我觉得这个角度理解 factor 非常实在，尤其是对于 农学、林学、生态背景的我们。如果数据里的水平是你后加的，加的时候漏掉了一个水平，那后果也不是很严重，就是分析不能继续，直到你找到错误：</p>
+<pre class="sourceCode r"><code class="sourceCode r">fertilizer &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;N&quot;</span>, <span class="st">&quot;P&quot;</span>, <span class="st">&quot;K&quot;</span>,<span class="st">&quot;CK&quot;</span>)
+<span class="kw">parse_factor</span>(<span class="kw">c</span>(<span class="st">&quot;N&quot;</span>, <span class="st">&quot;P&quot;</span>, <span class="st">&quot;K&quot;</span>, <span class="st">&quot;CK&quot;</span>, <span class="st">&quot;NPK&quot;</span>), <span class="dt">levels =</span> fertilizer)</code></pre>
+<pre><code>## Warning: 1 parsing failure.
+## row col           expected actual
+##   5  -- value in level set    NPK</code></pre>
+<pre><code>## [1] N    P    K    CK   &lt;NA&gt;
+## attr(,&quot;problems&quot;)
+## # A tibble: 1 x 4
+##     row   col expected           actual
+##   &lt;int&gt; &lt;int&gt; &lt;chr&gt;              &lt;chr&gt; 
+## 1     5    NA value in level set NPK   
+## Levels: N P K CK</code></pre>
+<p>如果不幸漏掉了 “NPK” 这个处理，那么这个解析就会报错，无法完成，直到你在 fertilizer 内增加了复合肥<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>这个处理。</p>
+<p><strong>如果更不幸的事情发生了，你排查不到错误，无法将字符转换为因子类型，那么无需着急，我们后面还有其他工具，此时就让他们作为字符类型好了</strong>。</p>
+</div>
+<div id="datetime" class="section level3">
+<h3><span class="header-section-number">3.2.2</span> 时间与日期</h3>
+<p><code>parse_datetime</code> 默认解析的方式非常符合中国人的习惯，采用的是 <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO8601</a>, 年月日及时间的方式，如同我最开始数据导入章节 <a href="readr.html#readr">3</a> 举例时，<code>read_csv</code> 十分准确的识别了这个时间。</p>
 
 
+</div>
 </div>
 </div>
 <div class="footnotes">
@@ -410,6 +435,7 @@ tf<span class="op">$</span>Sepal.Leng</code></pre>
 <ol start="2">
 <li id="fn2"><p>R 内没有 float<a href="readr.html#fnref2" class="footnote-back">↩</a></p></li>
 <li id="fn3"><p>有时候我会把省掉的补充上，如果后面遇到不得不详细讲的内容时。<a href="readr.html#fnref3" class="footnote-back">↩</a></p></li>
+<li id="fn4"><p>农学的童鞋都理解吧，我记得我当时生物统计教材将处理和水平时就用的不同施肥，虽然当时没学好，这么“土的掉渣”的例子我还记得。<a href="readr.html#fnref4" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
