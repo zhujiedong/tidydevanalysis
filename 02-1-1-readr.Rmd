@@ -81,3 +81,16 @@ x <- parse_integer(c("123", "456", "abc", "123.321"))
 x
 ```
 
+`parse_*` 有八个函数，他们遵循相同的语法结构，其中：
+
+* `parse_logical` 与 `parse_integer` 类型非常简单，不会出错（数据里面掺杂了其他类型那属于人的错误或机器的错误）。
+
+* `parse_double` 则是严格的解析方式，必须是浮点类型的^[R 内没有 float]，而 `parse_number` 则相对宽松，我们的问题主要出现在万一你分析的是德国等欧洲国家的数据，反正我第一次看到德国人的发票愣是看了半天才想明白价格。
+
+* `parse_character` 则是非常容易解析的类型，其复杂也在编码上，对于我们来讲，多数情况是不大可能出错的。
+
+* `parse_factor` 功能是创建分类变量，对于我们实验数据时用的非常多的。
+
+* `parse_datetime`, `parse_date`, `parse_time` 则是专门解析时间日期的
+
+\cleardoublepage

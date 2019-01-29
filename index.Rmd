@@ -1,5 +1,5 @@
 --- 
-title: "使用 tidyverse 的方式分析光合仪的数据"
+title: "使用 tidyverse 的方式分析仪器测量的数据"
 author: "祝介东<br /> <br /> 北京力高泰科技有限公司"
 affiliation: "北京力高泰科技有限公司"
 date: "`r Sys.Date()`"
@@ -11,8 +11,8 @@ colorlinks: yes
 lot: yes
 lof: yes
 site: bookdown::bookdown_site
-description: "使用 R 语言分析 LI-6400XT 与 LI-6800 数据"
-github-repo: zhujiedong/tidyphotoanalysis
+description: "使用 tidyverse 的方式分析仪器测量的数据"
+github-repo: zhujiedong/tidydevanalysis
 graphics: yes
 cover-image: images/coverpage.png
 ---
@@ -22,9 +22,13 @@ cover-image: images/coverpage.png
 ------
 
 ```{asis, echo=identical(knitr:::pandoc_to(), 'html')}
-**Note**: 本文内容仅为我 github 中相关repo (tidyphotoanalysis) 的在线预览版本，并不保证及时更新。
+**Note**: 本文内容仅为我 github 中相关repo (tidydevanalysis) 的在线预览版本，并不保证及时更新。
 
-<p style="text-align: center;"><img src="images/coverpage.png" /></p>
+<p style="text-align: center;"><img src="images/coverpage.png"width="250" height="375" alt="Cover image" align="right" style="margin: 0 1em 0 1em" /></p>
 ```
 
-本文同样纯属个人打发出差漫漫长夜的作品，并非正式资料，只不过尽量使用了 tidyverse 的方式进行，之前的文章参考 [photoanalysis](https://zhujiedong.github.io/photoanalysis/)。
+本文同样纯属个人打发出差漫漫长夜的作品，并非正式资料，只不过尽量使用了 tidyverse 的方式进行，具体可参考 [photoanalysis](https://zhujiedong.github.io/photoanalysis/) 的原因。
+
+本文能保证的是只要 github 不关，内容就永远可以在线预览，尽量更新，及时纠错。其余事情概不承诺，参考需谨慎。
+
+另，图片仅仅为使得内容显得正式，为网络盗图，侵删。如果你同样在某些时刻闲的无聊，欢迎给我设计个封面。

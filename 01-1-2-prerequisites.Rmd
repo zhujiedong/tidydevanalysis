@@ -18,5 +18,5 @@ install.packages("tidyverse")
 devtools::install_github("tidyverse/tidyverse")
 ```
 
-
+\cleardoublepage
 
