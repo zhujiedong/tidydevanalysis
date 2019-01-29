@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>第 3 章 数据的导入 | 使用 tidyverse 的方式分析光合仪的数据</title>
+  <meta name="description" content="使用 R 语言分析 LI-6400XT 与 LI-6800 数据">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="第 3 章 数据的导入 | 使用 tidyverse 的方式分析光合仪的数据" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:image" content="images/coverpage.png" />
+  <meta property="og:description" content="使用 R 语言分析 LI-6400XT 与 LI-6800 数据" />
+  <meta name="github-repo" content="zhujiedong/tidyphotoanalysis" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="第 3 章 数据的导入 | 使用 tidyverse 的方式分析光合仪的数据" />
+  
+  <meta name="twitter:description" content="使用 R 语言分析 LI-6400XT 与 LI-6800 数据" />
+  <meta name="twitter:image" content="images/coverpage.png" />
+
+<meta name="author" content="祝介东    北京力高泰科技有限公司">
+
+
+<meta name="date" content="2019-01-29">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="prerequisites.html">
+<link rel="next" href="references.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="css\style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R 软件与光合数据分析</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>欢迎</a></li>
+<li class="chapter" data-level="" data-path="frontmatter.html"><a href="frontmatter.html"><i class="fa fa-check"></i>前言</a></li>
+<li class="chapter" data-level="" data-path="author.html"><a href="author.html"><i class="fa fa-check"></i>关于作者</a></li>
+<li class="chapter" data-level="" data-path="copyright.html"><a href="copyright.html"><i class="fa fa-check"></i>版权</a></li>
+<li class="chapter" data-level="1" data-path="origin-tidyverse.html"><a href="origin-tidyverse.html"><i class="fa fa-check"></i><b>1</b> tidyverse 的起源</a><ul>
+<li class="chapter" data-level="1.1" data-path="origin-tidyverse.html"><a href="origin-tidyverse.html#tidyworkflow"><i class="fa fa-check"></i><b>1.1</b> tidyverse 的流程</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="prerequisites.html"><a href="prerequisites.html"><i class="fa fa-check"></i><b>2</b> 准备工作</a></li>
+<li class="chapter" data-level="3" data-path="readr.html"><a href="readr.html"><i class="fa fa-check"></i><b>3</b> 数据的导入</a><ul>
+<li class="chapter" data-level="3.1" data-path="readr.html"><a href="readr.html#attridiff"><i class="fa fa-check"></i><b>3.1</b> 属性的差别</a></li>
+<li class="chapter" data-level="3.2" data-path="readr.html"><a href="readr.html#parse-str"><i class="fa fa-check"></i><b>3.2</b> 数据类型的解析</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>参考文献</a></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="blank">由 bookdown 驱动</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">使用 tidyverse 的方式分析光合仪的数据</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="readr" class="section level1">
+<h1><span class="header-section-number">第 3 章</span> 数据的导入</h1>
+<p>基本的数据导入，tidyverse 中的核心包为<code>readr</code>，如果熟悉 <code>read.csv</code> 或其他相似的函数，那么使用 <code>readr</code> 包必然也没有障碍，那么我们先用同样的两种方式，导入相同的 csv 文件，观察其差别：</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)</code></pre>
+<pre><code>## -- Attaching packages ----------------- tidyverse 1.2.1.9000 --</code></pre>
+<pre><code>## √ ggplot2 3.1.0     √ purrr   0.2.5
+## √ tibble  2.0.1     √ dplyr   0.7.8
+## √ tidyr   0.8.2     √ stringr 1.3.1
+## √ readr   1.3.1     √ forcats 0.3.0</code></pre>
+<pre><code>## -- Conflicts ------------------------- tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;./data/aci_ex.csv&quot;</span>, <span class="dt">local =</span> <span class="kw">locale</span>(<span class="dt">encoding =</span> <span class="st">&quot;latin1&quot;</span>))</code></pre>
+<pre><code>## Parsed with column specification:
+## cols(
+##   .default = col_double(),
+##   date = col_datetime(format = &quot;&quot;),
+##   LightAdaptedID = col_character(),
+##   DarkPulseID = col_character()
+## )</code></pre>
+<pre><code>## See spec(...) for full column specifications.</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">df</code></pre>
+<pre><code>## # A tibble: 22 x 104
+##      obs   time elapsed date                  TIME       E        A    Ci
+##    &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt; &lt;dttm&gt;               &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;
+##  1     1 1.48e9   7372. 2016-10-02 11:05:33 1.48e9 0.00770  29.5    275. 
+##  2     2 1.48e9   7374. 2016-10-02 11:05:35 1.48e9 0.00781  26.3    239. 
+##  3     3 1.48e9   7376. 2016-10-02 11:05:37 1.48e9 0.00790  22.8    205. 
+##  4     4 1.48e9   7378. 2016-10-02 11:05:39 1.48e9 0.00799  18.6    173. 
+##  5     5 1.48e9   7380. 2016-10-02 11:05:41 1.48e9 0.00806  14.4    140. 
+##  6     6 1.48e9   7382. 2016-10-02 11:05:43 1.48e9 0.00822   9.73   110. 
+##  7     7 1.48e9   7384. 2016-10-02 11:05:45 1.48e9 0.00835   5.01    78.8
+##  8     8 1.48e9   7386. 2016-10-02 11:05:47 1.48e9 0.00839  -0.0205  48.5
+##  9     9 1.48e9   7388. 2016-10-02 11:05:49 1.48e9 0.00860  28.8    286. 
+## 10    10 1.48e9   7390. 2016-10-02 11:05:51 1.48e9 0.00875  34.9    362. 
+## # ... with 12 more rows, and 96 more variables: Pci &lt;dbl&gt;, Pca &lt;dbl&gt;,
+## #   gsw &lt;dbl&gt;, gbw &lt;dbl&gt;, gtw &lt;dbl&gt;, gtc &lt;dbl&gt;, Rabs &lt;dbl&gt;, TleafEB &lt;dbl&gt;,
+## #   TleafCnd &lt;dbl&gt;, SVPleaf &lt;dbl&gt;, RHcham &lt;dbl&gt;, VPcham &lt;dbl&gt;,
+## #   SVPcham &lt;dbl&gt;, VPDleaf &lt;dbl&gt;, blfa_1 &lt;dbl&gt;, blfa_2 &lt;dbl&gt;,
+## #   blfa_3 &lt;dbl&gt;, DarkAdaptedID &lt;dbl&gt;, Fo &lt;dbl&gt;, Fm &lt;dbl&gt;, Fv &lt;dbl&gt;,
+## #   Fv.Fm &lt;dbl&gt;, Adark &lt;dbl&gt;, LightAdaptedID &lt;chr&gt;, Fs &lt;dbl&gt;, Fm. &lt;dbl&gt;,
+## #   PhiPS2 &lt;dbl&gt;, PS2.1 &lt;dbl&gt;, Qabs_fs &lt;dbl&gt;, Afs &lt;dbl&gt;, ETR &lt;dbl&gt;,
+## #   Fv..Fm. &lt;dbl&gt;, PhiCO2 &lt;dbl&gt;, NPQ &lt;dbl&gt;, DarkPulseID &lt;chr&gt;, Fo. &lt;dbl&gt;,
+## #   Fv. &lt;dbl&gt;, qP &lt;dbl&gt;, qN &lt;dbl&gt;, qP_Fo &lt;dbl&gt;, qN_Fo &lt;dbl&gt;, Qin &lt;dbl&gt;,
+## #   Qabs &lt;dbl&gt;, alpha &lt;dbl&gt;, convert &lt;dbl&gt;, TIME.1 &lt;dbl&gt;, CO2_s &lt;dbl&gt;,
+## #   CO2_r &lt;dbl&gt;, H2O_s &lt;dbl&gt;, H2O_r &lt;dbl&gt;, Flow &lt;dbl&gt;, Pa &lt;dbl&gt;,
+## #   `|¤Pcham` &lt;dbl&gt;, Tair &lt;dbl&gt;, Tleaf &lt;dbl&gt;, Tleaf2 &lt;dbl&gt;,
+## #   Fan_speed &lt;dbl&gt;, Qamb_in &lt;dbl&gt;, Qamb_out &lt;dbl&gt;, Q &lt;dbl&gt;, f_red &lt;dbl&gt;,
+## #   f_blue &lt;dbl&gt;, f_farred &lt;dbl&gt;, F &lt;dbl&gt;, Q_modavg &lt;dbl&gt;, F_dc &lt;dbl&gt;,
+## #   Tled &lt;dbl&gt;, TDigital &lt;dbl&gt;, TPreamp &lt;dbl&gt;, TPwrSpy &lt;dbl&gt;,
+## #   TDrive &lt;dbl&gt;, F_avg &lt;dbl&gt;, dF.dt &lt;dbl&gt;, dF_dc.dt &lt;dbl&gt;,
+## #   F_dc_avg &lt;dbl&gt;, period &lt;dbl&gt;, DIAG &lt;dbl&gt;, Flow_s &lt;dbl&gt;, Flow_r &lt;dbl&gt;,
+## #   Txchg &lt;dbl&gt;, Tirga &lt;dbl&gt;, Tchopper &lt;dbl&gt;, Ts &lt;dbl&gt;, Tr &lt;dbl&gt;,
+## #   CO2_. &lt;dbl&gt;, Desiccant_. &lt;dbl&gt;, Humidifier_. &lt;dbl&gt;,
+## #   Heatx_setpoint &lt;dbl&gt;, CO2_r_setpoint &lt;dbl&gt;, H2O_r_setpoint &lt;dbl&gt;,
+## #   SS_s &lt;dbl&gt;, SS_r &lt;dbl&gt;, MatchH2O &lt;dbl&gt;, MatchCO2 &lt;dbl&gt;,
+## #   MatchValveR &lt;dbl&gt;, MatchValveS &lt;dbl&gt;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./data/aci_ex.csv&quot;</span>)
+<span class="kw">head</span>(df)</code></pre>
+<pre><code>##   obs       time elapsed              date       TIME           E        A
+## 1   1 1475427934  7372.4 20161002 11:05:33 1475427933 0.007696760 29.47670
+## 2   2 1475427936  7374.4 20161002 11:05:35 1475427935 0.007808186 26.31897
+## 3   3 1475427938  7376.4 20161002 11:05:37 1475427937 0.007901756 22.76927
+## 4   4 1475427940  7378.4 20161002 11:05:39 1475427939 0.007987330 18.61361
+## 5   5 1475427942  7380.4 20161002 11:05:41 1475427941 0.008064806 14.43679
+## 6   6 1475427944  7382.4 20161002 11:05:43 1475427943 0.008215388  9.73141
+##         Ci      Pci      Pca       gsw      gbw       gtw       gtc
+## 1 274.6465 30.69809 38.03046 0.3432676 2.001378 0.4403924 0.2800793
+## 2 239.3628 30.50294 37.78892 0.3481919 2.007294 0.4405757 0.2801836
+## 3 205.2410 30.36986 37.54531 0.3530725 2.002956 0.4405515 0.2801784
+## 4 172.8188 30.21500 37.29877 0.3561105 2.000471 0.4410542 0.2805097
+## 5 140.4173 30.02464 37.05066 0.3602038 2.003897 0.4407989 0.2803362
+## 6 109.8534 29.89953 36.80124 0.3671059 2.000833 0.4404739 0.2801333
+##       Rabs  TleafEB TleafCnd  SVPleaf   RHcham   VPcham  SVPcham  VPDleaf
+## 1 165.2454 25.96638  24.9904 3.177858 55.40208 1.979484 3.572942 1.198374
+## 2 165.1947 25.96739  24.9941 3.178559 55.40164 1.979585 3.573152 1.198975
+## 3 165.2454 25.97100  24.9860 3.177025 55.39090 1.979457 3.573614 1.197568
+## 4 165.2454 25.96911  24.9840 3.176646 55.38870 1.979506 3.573845 1.197140
+## 5 165.2437 25.97255  24.9865 3.177119 55.37738 1.979323 3.574244 1.197797
+## 6 165.2454 25.97429  24.9857 3.176968 55.36981 1.979192 3.574496 1.197776
+##        blfa_1     blfa_2   blfa_3 DarkAdaptedID Fo Fm Fv Fv.Fm Adark
+## 1 -0.03479512 0.03906057 3.019639             0  0  0  0     0    -1
+## 2 -0.03494065 0.03922395 3.029814             0  0  0  0     0    -1
+## 3 -0.03483390 0.03910411 3.022352             0  0  0  0     0    -1
+## 4 -0.03477282 0.03903553 3.018079             0  0  0  0     0    -1
+## 5 -0.03485704 0.03913008 3.023969             0  0  0  0     0    -1
+## 6 -0.03478173 0.03904554 3.018702             0  0  0  0     0    -1
+##   LightAdaptedID Fs Fm. PhiPS2 PS2.1 Qabs_fs Afs ETR Fv..Fm.     PhiCO2
+## 1              -  0   0      0   0.5       0   0   0       0 0.02699408
+## 2              -  0   0      0   0.5       0   0   0       0 0.02683882
+## 3              -  0   0      0   0.5       0   0   0       0 0.02643125
+## 4              -  0   0      0   0.5       0   0   0       0 0.02611003
+## 5              -  0   0      0   0.5       0   0   0       0 0.02588544
+## 6              -  0   0      0   0.5       0   0   0       0 0.02539339
+##   NPQ DarkPulseID Fo. Fv. qP qN qP_Fo qN_Fo      Qin     Qabs     alpha
+## 1   0           -   0   0  0  0     0     0 1000.060 843.0848 0.8430005
+## 2   0           -   0   0  0  0     0     0  999.706 843.0932 0.8430005
+## 3   0           -   0   0  0  0     0     0 1000.040 842.8319 0.8430005
+## 4   0           -   0   0  0  0     0     0  999.990 843.0924 0.8429996
+## 5   0           -   0   0  0  0     0     0  999.973 843.0839 0.8429996
+## 6   0           -   0   0  0  0     0     0  999.963 843.0755 0.8429996
+##     convert     TIME.1   CO2_s   CO2_r   H2O_s   H2O_r    Flow      Pa
+## 1 0.1960010 1475427933 367.719 400.026 23.5181 17.1985 599.683 83.9679
+## 2 0.1960010 1475427935 321.236 350.063 23.5197 17.1997 600.208 83.9672
+## 3 0.1960010 1475427937 275.105 300.048 23.5183 17.2012 599.744 83.9667
+## 4 0.1959991 1475427939 229.601 250.048 23.5189 17.2009 600.127 83.9665
+## 5 0.1959991 1475427941 184.130 200.052 23.5173 17.1997 600.164 83.9654
+## 6 0.1959991 1475427943 139.148 150.023 23.5148 17.1972 599.687 83.9670
+##     ΔPcham    Tair   Tleaf Tleaf2 Fan_speed Qamb_in Qamb_out       Q
+## 1 0.200645 26.9704 25.0272  999.9   9993.12       0  6.93277 1000.10
+## 2 0.199888 26.9714 24.9913  999.9  10035.00       0  6.93277 1000.11
+## 3 0.199957 26.9736 24.9877  999.9  10004.40       0  6.93277 1000.11
+## 4 0.200108 26.9747 25.0090  999.9   9986.88       0  6.93277  999.79
+## 5 0.199135 26.9766 25.0247  999.9  10011.20       0  6.93277 1000.10
+## 6 0.200911 26.9778 25.0009  999.9   9989.38       0  6.93277 1000.09
+##      f_red    f_blue f_farred      F Q_modavg    F_dc   Tled TDigital
+## 1 0.900015 0.0999851        0 2.8427        0 7893.66 38.812   41.812
+## 2 0.899984 0.1000160        0 2.5274        0 7887.49 38.812   41.812
+## 3 0.899984 0.1000160        0 2.6852        0 7878.68 38.812   41.812
+## 4 0.899984 0.1000160        0 2.6955        0 7869.08 38.812   41.812
+## 5 0.900015 0.0999851        0 2.5337        0 7865.47 38.812   41.812
+## 6 0.900015 0.0999851        0 2.3220        0 7856.35 38.812   41.812
+##   TPreamp TPwrSpy TDrive    F_avg      dF.dt  dF_dc.dt F_dc_avg period
+## 1  40.437  40.625 39.187 2.617227 -0.5654120 -144.1986 7913.660     15
+## 2  40.437  40.625 39.187 2.616973 -0.6446940 -161.5990 7909.170     15
+## 3  40.437  40.625 39.187 2.585404 -0.5877231 -178.2270 7902.338     15
+## 4  40.437  40.625 39.187 2.602727 -0.4243932 -191.5279 7896.840     15
+## 5  40.437  40.625 39.187 2.579562 -0.1809162 -199.7292 7891.172     15
+## 6  40.437  40.625 39.187 2.550577  0.1461197 -211.9402 7883.021     15
+##   DIAG  Flow_s  Flow_r   Txchg   Tirga Tchopper      Ts      Tr   CO2_.
+## 1    2 506.541 663.349 25.4141 27.5924  30.0001 27.5408 27.5134 29.9284
+## 2    2 501.762 662.342 25.4212 27.5924  30.0001 27.5408 27.5134 29.7805
+## 3    2 514.578 663.419 25.4292 27.5924  30.0000 27.5408 27.5134 29.5901
+## 4    2 498.758 662.436 25.4351 27.5924  30.0000 27.5408 27.5134 29.3941
+## 5    2 522.239 662.835 25.4384 27.5924  30.0000 27.5408 27.5134 29.2541
+## 6    2 504.517 662.881 25.4413 27.5924  30.0000 27.5408 27.5134 29.0845
+##   Desiccant_. Humidifier_. Heatx_setpoint CO2_r_setpoint H2O_r_setpoint
+## 1      43.693            0        25.4324        460.667        17.2388
+## 2      43.693            0        25.4324        460.667        17.2388
+## 3      43.693            0        25.4390        455.833        17.2388
+## 4      43.693            0        25.4390        450.667        17.2388
+## 5      43.693            0        25.4390        450.667        17.2388
+## 6      43.693            0        25.4491        445.833        17.2388
+##      SS_s    SS_r MatchH2O MatchCO2 MatchValveR MatchValveS
+## 1 100.741 101.259   -0.031    5.465         100         100
+## 2 100.741 101.260   -0.031    5.465         100         100
+## 3 100.742 101.261   -0.031    5.465         100         100
+## 4 100.742 101.261   -0.031    5.465         100         100
+## 5 100.742 101.261   -0.031    5.465         100         100
+## 6 100.743 101.261   -0.031    5.465         100         100</code></pre>
+<p>这里先不谈其他，比较一下代码的差别, <code>read_csv</code> 读取同样的我这一个文件，多了一个 <code>local = locale(encoding = "latin1")</code> 的设定，看上去复杂了，实际上多数情况是无需的，但我们这个文件内有希腊字母等存在，如果不实用就会提示 <code>input string 1 is invalid in this locale</code> 相关报错，在此不过多解释，相信大家看了下面关于 locale 的一个简单解释就明白了：</p>
+<p><a href="https://docs.oracle.com/cd/E23824_01/html/E26033/glmbx.html">locale</a></p>
+<div id="attridiff" class="section level2">
+<h2><span class="header-section-number">3.1</span> 属性的差别</h2>
+<p>我们看一下读取的数据的类有无差别：</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+df1 &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;./data/aci_ex.csv&quot;</span>, <span class="dt">local =</span> <span class="kw">locale</span>(<span class="dt">encoding =</span> <span class="st">&quot;latin1&quot;</span>))</code></pre>
+<pre><code>## Parsed with column specification:
+## cols(
+##   .default = col_double(),
+##   date = col_datetime(format = &quot;&quot;),
+##   LightAdaptedID = col_character(),
+##   DarkPulseID = col_character()
+## )</code></pre>
+<pre><code>## See spec(...) for full column specifications.</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">df2 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./data/aci_ex.csv&quot;</span>)
+<span class="kw">class</span>(df1)</code></pre>
+<pre><code>## [1] &quot;spec_tbl_df&quot; &quot;tbl_df&quot;      &quot;tbl&quot;         &quot;data.frame&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(df2)</code></pre>
+<pre><code>## [1] &quot;data.frame&quot;</code></pre>
+<p>除了 data.frame 的属性外，<code>readr</code> 除了常规的 data.frame 的类外，还多了几个，它属于 tibble 的属性，我们不多说，看一下 Hadley 大神对 tibble 的解释：</p>
+
+<div class="definition">
+<span id="def:unnamed-chunk-3" class="definition"><strong>Definition 3.1  (tibble definition)  </strong></span>Tibbles are a modern reimagining of the data.frame, keeping what time has proven to be effective, and throwing out what is not.
+</div>
+
+<p>tibble 不同于 dataframe 的地方主要在打印和构造子数据集时：</p>
+<ul>
+<li><p>Tibbles 只显示前 10 行数据，但会显示所有列，因此大数据时比较方便，此外，除了显示列名外，他还回显示数据类型。</p></li>
+<li><p>此外，使用 “$” 构造子集时 tibble 要求严格的变量名称。例如：</p></li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#dataframe</span>
+df &lt;-<span class="st"> </span><span class="kw">head</span>(iris)
+<span class="co">#tibble</span>
+tf &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(iris)
+
+<span class="co"># return results even with wrong name</span>
+df<span class="op">$</span>Sepal.Leng</code></pre>
+<pre><code>## [1] 5.1 4.9 4.7 4.6 5.0 5.4</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># error</span>
+tf<span class="op">$</span>Sepal.Leng</code></pre>
+<pre><code>## Warning: Unknown or uninitialised column: &#39;Sepal.Leng&#39;.</code></pre>
+<pre><code>## NULL</code></pre>
+<ul>
+<li>Tibbles 仍然可以使用 [ 和 [[: [ 返回的是另一个 tibble, 而 [[ 返回的是一个向量，不在需要 <code>drop = FALSE</code>!</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(iris[ , <span class="dv">1</span>, <span class="dt">drop =</span> <span class="ot">FALSE</span>])</code></pre>
+<pre><code>## [1] &quot;data.frame&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(<span class="kw">as_data_frame</span>(iris)[ , <span class="dv">1</span>])</code></pre>
+<pre><code>## Warning: `as_data_frame()` is deprecated, use `as_tibble()` (but mind the new semantics).
+## This warning is displayed once per session.</code></pre>
+<pre><code>## [1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</code></pre>
+<p><strong>注意：tibble 和 dataframe 还有一个重要区别是 tibble 不会将字符转换为因子，相当于使用 <code>stringsAsFactors = FALSE</code></strong></p>
+</div>
+<div id="parse-str" class="section level2">
+<h2><span class="header-section-number">3.2</span> 数据类型的解析</h2>
+<p>前面已经提到了，tibble 会自动解析数据的类型，但是这个类型是怎么解析的，解析错误怎么办，这就不得不提 <code>parse_*</code> 一系列函数了：</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(<span class="kw">parse_logical</span>(<span class="kw">c</span>(<span class="st">&quot;TRUE&quot;</span>, <span class="st">&quot;FALSE&quot;</span>, <span class="st">&quot;NA&quot;</span>)))</code></pre>
+<pre><code>##  logi [1:3] TRUE FALSE NA</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(<span class="kw">parse_integer</span>(<span class="kw">c</span>(<span class="st">&quot;1&quot;</span>, <span class="st">&quot;2&quot;</span>, <span class="st">&quot;3&quot;</span>)))</code></pre>
+<pre><code>##  int [1:3] 1 2 3</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(<span class="kw">parse_date</span>(<span class="kw">c</span>(<span class="st">&quot;2011-01-01&quot;</span>, <span class="st">&quot;1997-10-14&quot;</span>)))</code></pre>
+<pre><code>##  Date[1:2], format: &quot;2011-01-01&quot; &quot;1997-10-14&quot;</code></pre>
+<p>需要注意的是，如果解析失败，在输出时会是 NA，这就是为什么一些他别乱的数据会出现大量 NA 的原因：</p>
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">parse_integer</span>(<span class="kw">c</span>(<span class="st">&quot;123&quot;</span>, <span class="st">&quot;456&quot;</span>, <span class="st">&quot;abc&quot;</span>, <span class="st">&quot;123.321&quot;</span>))</code></pre>
+<pre><code>## Warning: 2 parsing failures.
+## row col               expected actual
+##   3  -- an integer               abc 
+##   4  -- no trailing characters   .321</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">x</code></pre>
+<pre><code>## [1] 123 456  NA  NA
+## attr(,&quot;problems&quot;)
+## # A tibble: 2 x 4
+##     row   col expected               actual
+##   &lt;int&gt; &lt;int&gt; &lt;chr&gt;                  &lt;chr&gt; 
+## 1     3    NA an integer             abc   
+## 2     4    NA no trailing characters .321</code></pre>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="prerequisites.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/zhujiedong/tidyphotoanalysis/blob/master/02-1-1-readr.Rmd",
+"text": "缂栬緫"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["bookdown.pdf", "bookdown.epub"],
+"toc": {
+"collapse": "none"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

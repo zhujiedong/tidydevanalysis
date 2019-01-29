@@ -1,0 +1,21 @@
+\mainmatter
+
+# tidyverse 的起源 {#origin-tidyverse}
+
+提到 R，他们创始人的名字估计能讲出来的没那么多，但是 [Hadley Wickham](https://github.com/hadley) 绝对是在他发布 `ggplot2` 成名后，鼎鼎有名的人物。
+
+书归正传，tidyverse 为一些列符合相同设计哲学、语法和数据结构的包的集合，也就是说只要符合这个定义，都可以算作为 tidyverse，不管是不是 tidyverse 已经收录。
+
+本文内容刻意模仿了 [R for Data Science](https://r4ds.had.co.nz/)，如有兴趣，更建议各位直接看原文。
+
+## tidyverse 的流程 {#tidyworkflow}
+
+很多时候，一言以蔽之后面的内容听上去很概括，实际上效果远不如一副图片更清晰和直观，例如图 \@ref(fig:workflow)
+
+```{r, workflow, echo=FALSE, fig.cap="tidyverse 数据分析的流程"}
+url <- "https://d33wubrfki0l68.cloudfront.net/571b056757d68e6df81a3e3853f54d3c76ad6efc/32d37/diagrams/data-science.png"
+knitr::include_graphics(path = url)
+```
+
+实际上这些处理步骤，大家下意识的就会按照这个进行处理，只不过未将其提炼并系统化而已，多数时候我们导入数据后，这些数据并不能立即使用，通俗的称之为“脏”数据，需要对其进行清洁（例如缺失值等），之后可能需要根据已有数据计算部分数据，处理只好后进行可视化建模，最后整理实验结果，不管发表还是报告等，都是交流的过程。
+

@@ -1,0 +1,83 @@
+# 数据的导入 {#readr}
+
+基本的数据导入，tidyverse 中的核心包为`readr`，如果熟悉 `read.csv` 或其他相似的函数，那么使用 `readr` 包必然也没有障碍，那么我们先用同样的两种方式，导入相同的 csv 文件，观察其差别：
+
+```{r,tidycsv}
+library(tidyverse)
+df <- read_csv("./data/aci_ex.csv", local = locale(encoding = "latin1"))
+df
+```
+
+
+```{r, basecsv}
+df <- read.csv("./data/aci_ex.csv")
+head(df)
+```
+
+这里先不谈其他，比较一下代码的差别, `read_csv` 读取同样的我这一个文件，多了一个 `local = locale(encoding = "latin1")` 的设定，看上去复杂了，实际上多数情况是无需的，但我们这个文件内有希腊字母等存在，如果不实用就会提示 `input string 1 is invalid in this locale` 相关报错，在此不过多解释，相信大家看了下面关于 locale 的一个简单解释就明白了：
+
+[locale](https://docs.oracle.com/cd/E23824_01/html/E26033/glmbx.html)
+
+## 属性的差别 {#attridiff}
+
+我们看一下读取的数据的类有无差别：
+
+```{r}
+library(tidyverse)
+df1 <- read_csv("./data/aci_ex.csv", local = locale(encoding = "latin1"))
+df2 <- read.csv("./data/aci_ex.csv")
+class(df1)
+class(df2)
+```
+
+除了 data.frame 的属性外，`readr` 除了常规的 data.frame 的类外，还多了几个，它属于 tibble 的属性，我们不多说，看一下 Hadley 大神对 tibble 的解释：
+
+```{definition, name="tibble definition"}
+Tibbles are a modern reimagining of the data.frame, keeping what time has proven to be effective, and throwing out what is not. 
+```
+
+tibble 不同于 dataframe 的地方主要在打印和构造子数据集时：
+
+* Tibbles 只显示前 10 行数据，但会显示所有列，因此大数据时比较方便，此外，除了显示列名外，他还回显示数据类型。
+
+* 此外，使用 "$" 构造子集时 tibble 要求严格的变量名称。例如：
+
+```{r}
+#dataframe
+df <- head(iris)
+#tibble
+tf <- as_tibble(iris)
+
+# return results even with wrong name
+df$Sepal.Leng
+
+# error
+tf$Sepal.Leng
+```
+
+* Tibbles 仍然可以使用 [ 和 [[: [ 返回的是另一个 tibble, 而 [[ 返回的是一个向量，不在需要 `drop = FALSE`!
+
+```{r}
+class(iris[ , 1, drop = FALSE])
+class(as_data_frame(iris)[ , 1])
+```
+
+**注意：tibble 和 dataframe 还有一个重要区别是 tibble 不会将字符转换为因子，相当于使用 `stringsAsFactors = FALSE`**
+
+## 数据类型的解析 {#parse-str}
+
+前面已经提到了，tibble 会自动解析数据的类型，但是这个类型是怎么解析的，解析错误怎么办，这就不得不提 `parse_*` 一系列函数了：
+
+```{r}
+str(parse_logical(c("TRUE", "FALSE", "NA")))
+str(parse_integer(c("1", "2", "3")))
+str(parse_date(c("2011-01-01", "1997-10-14")))
+```
+
+需要注意的是，如果解析失败，在输出时会是 NA，这就是为什么一些他别乱的数据会出现大量 NA 的原因：
+
+```{r}
+x <- parse_integer(c("123", "456", "abc", "123.321"))
+x
+```
+

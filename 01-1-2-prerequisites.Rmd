@@ -1,0 +1,22 @@
+# 准备工作 {#prerequisites}
+
+需要完成 tidyverse 方式的数据分析，必备的工具有^[Rstudio 为建议必备，其他编辑器也可]：
+
+* [R](https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/)
+* [Rstudio](https://www.rstudio.com/products/rstudio/download/)
+* [tidyverse](https://www.tidyverse.org/)
+
+其中，tidyverse 安装可分为 CRAN 版和 github 版本，这个无需纠结，二者均可：
+
+```{r, insttidycran, eval=FALSE}
+install.packages("tidyverse")
+```
+
+或
+
+```{r, insttidygit, eval=FALSE}
+devtools::install_github("tidyverse/tidyverse")
+```
+
+
+

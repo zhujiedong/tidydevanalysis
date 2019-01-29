@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>参考文献 | 使用 tidyverse 的方式分析光合仪的数据</title>
+  <title>第 1 章 tidyverse 的起源 | 使用 tidyverse 的方式分析光合仪的数据</title>
   <meta name="description" content="使用 R 语言分析 LI-6400XT 与 LI-6800 数据">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="参考文献 | 使用 tidyverse 的方式分析光合仪的数据" />
+  <meta property="og:title" content="第 1 章 tidyverse 的起源 | 使用 tidyverse 的方式分析光合仪的数据" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="images/coverpage.png" />
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="zhujiedong/tidyphotoanalysis" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="参考文献 | 使用 tidyverse 的方式分析光合仪的数据" />
+  <meta name="twitter:title" content="第 1 章 tidyverse 的起源 | 使用 tidyverse 的方式分析光合仪的数据" />
   
   <meta name="twitter:description" content="使用 R 语言分析 LI-6400XT 与 LI-6800 数据" />
   <meta name="twitter:image" content="images/coverpage.png" />
@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="readr.html">
-
+<link rel="prev" href="copyright.html">
+<link rel="next" href="prerequisites.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -163,23 +163,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="references" class="section level1 unnumbered">
-<h1>参考文献</h1>
+<div id="origin-tidyverse" class="section level1">
+<h1><span class="header-section-number">第 1 章</span> tidyverse 的起源</h1>
+<p>提到 R，他们创始人的名字估计能讲出来的没那么多，但是 <a href="https://github.com/hadley">Hadley Wickham</a> 绝对是在他发布 <code>ggplot2</code> 成名后，鼎鼎有名的人物。</p>
+<p>书归正传，tidyverse 为一些列符合相同设计哲学、语法和数据结构的包的集合，也就是说只要符合这个定义，都可以算作为 tidyverse，不管是不是 tidyverse 已经收录。</p>
+<p>本文内容刻意模仿了 <a href="https://r4ds.had.co.nz/">R for Data Science</a>，如有兴趣，更建议各位直接看原文。</p>
+<div id="tidyworkflow" class="section level2">
+<h2><span class="header-section-number">1.1</span> tidyverse 的流程</h2>
+<p>很多时候，一言以蔽之后面的内容听上去很概括，实际上效果远不如一副图片更清晰和直观，例如图 <a href="origin-tidyverse.html#fig:workflow">1.1</a></p>
+<div class="figure"><span id="fig:workflow"></span>
+<img src="https://d33wubrfki0l68.cloudfront.net/571b056757d68e6df81a3e3853f54d3c76ad6efc/32d37/diagrams/data-science.png" alt="tidyverse 数据分析的流程"  />
+<p class="caption">
+图 1.1: tidyverse 数据分析的流程
+</p>
+</div>
+<p>实际上这些处理步骤，大家下意识的就会按照这个进行处理，只不过未将其提炼并系统化而已，多数时候我们导入数据后，这些数据并不能立即使用，通俗的称之为“脏”数据，需要对其进行清洁（例如缺失值等），之后可能需要根据已有数据计算部分数据，处理只好后进行可视化建模，最后整理实验结果，不管发表还是报告等，都是交流的过程。</p>
 
 </div>
-
-
-
-
-
-
+</div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="readr.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="copyright.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="prerequisites.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -209,7 +217,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/zhujiedong/tidyphotoanalysis/blob/master/14-reference.Rmd",
+"link": "https://github.com/zhujiedong/tidyphotoanalysis/blob/master/01-1-1-tidyintro.Rmd",
 "text": "缂栬緫"
 },
 "history": {

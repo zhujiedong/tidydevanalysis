@@ -1,0 +1,35 @@
+\frontmatter
+
+# 前言 {- #frontmatter}
+
+目的与用途同 [photoanalysis](https://github.com/zhujiedong/photoanalysis)，纯属个人项目，在业余爱好者里面很流行的一个词概括为 "just for fun"，当然能帮助到别人也是一件很开心的事情。
+
+关于问题或建议，如果您有 github 帐号，优先欢迎在 github 提交：
+
+[github地址](https://github.com/zhujiedong/tidyphotoanalysis)
+
+如有其他仪器问题或者仪器购买需求，请使用下面方式与我们联系：
+
+* 北京力高泰科技有限公司 
+
+* 网址：[http://www.ecotek.com.cn](http://www.ecotek.com.cn)
+
+* 电话：010-51665551
+
+* 电子邮件：[info@ecotek.com.cn](info@ecotek.com.cn)
+
+* 地址：北京市西城区西直门南大街2号成铭大厦A座22F
+
+
+# 关于作者 {- #author}
+
+祝介东，[北京力高泰科技有限公司](http://www.ecotek.com.cn/) 工程师，本文内容为我在售后服务时所住的酒店所作（遍布国内大多数省份），本为我打发出差住酒店漫漫长夜的业余爱好，**此部分内容并非公司对我的职位所要求的内容，也并非我公司提供的服务内容，因此属于个人作品，仅供参考，我所在公司对此文内容不负任何责任**。文中代码得到了公司技术部同事： 刘美玲、徐粒、焦阳、王昭、张启尧、张云飞等的测试，其中焦阳贡献了 `jiptest` 包中基础荧光参数计算的代码，在此一并感谢。
+
+# 版权 {- #copyright}
+
+**本文旨在对广大 LI-6400XT 和 LI-6800 光合仪的用户提供一个数据分析的参考，本人或所在公司并未从中获取任何利益，内容错误疏漏之处，欢迎指正。本人保留一切权利，禁止一切将本文内容用于商业用途的行为，禁止商业公司使用。**
+
+
+
+
+\cleardoublepage
