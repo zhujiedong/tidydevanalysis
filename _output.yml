@@ -4,10 +4,10 @@ bookdown::gitbook:
     toc:
       collapse: none
       before: |
-        <li><a href="./">R 软件与光合数据分析</a></li>
+        <li><a href="./">R 软件与仪器数据分析</a></li>
       after: |
         <li><a href="https://bookdown.org" target="blank">由 bookdown 驱动</a></li>
-    download: [pdf, epub]
+    download: [pdf]
     edit: https://github.com/zhujiedong/tidyphotoanalysis/blob/master/%s
     sharing:
       github: yes

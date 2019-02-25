@@ -25,7 +25,7 @@
 <meta name="author" content="祝介东    北京力高泰科技有限公司">
 
 
-<meta name="date" content="2019-01-29">
+<meta name="date" content="2019-02-25">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -33,7 +33,7 @@
   
   
 <link rel="prev" href="prerequisites.html">
-<link rel="next" href="references.html">
+<link rel="next" href="corereadr.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -127,7 +127,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">R 软件与光合数据分析</a></li>
+<li><a href="./">R 软件与仪器数据分析</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>欢迎</a></li>
@@ -146,6 +146,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.2.1" data-path="readr.html"><a href="readr.html#factor-str"><i class="fa fa-check"></i><b>3.2.1</b> 因子类型</a></li>
 <li class="chapter" data-level="3.2.2" data-path="readr.html"><a href="readr.html#datetime"><i class="fa fa-check"></i><b>3.2.2</b> 时间与日期</a></li>
 </ul></li>
+<li class="chapter" data-level="3.3" data-path="readr.html"><a href="readr.html#julian-day-"><i class="fa fa-check"></i><b>3.3</b> Julian day 的转换</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="corereadr.html"><a href="corereadr.html"><i class="fa fa-check"></i><b>4</b> readr 包核心函数及举例</a></li>
+<li class="chapter" data-level="5" data-path="read-excel.html"><a href="read-excel.html"><i class="fa fa-check"></i><b>5</b> read_excel</a></li>
+<li class="chapter" data-level="6" data-path="todo.html"><a href="todo.html"><i class="fa fa-check"></i><b>6</b> todo</a><ul>
+<li class="chapter" data-level="6.1" data-path="todo.html"><a href="todo.html#data-transformation"><i class="fa fa-check"></i><b>6.1</b> data transformation</a></li>
+<li class="chapter" data-level="6.2" data-path="todo.html"><a href="todo.html#data-visulization"><i class="fa fa-check"></i><b>6.2</b> data visulization</a></li>
+<li class="chapter" data-level="6.3" data-path="todo.html"><a href="todo.html#model-r"><i class="fa fa-check"></i><b>6.3</b> model r</a></li>
+<li class="chapter" data-level="6.4" data-path="todo.html"><a href="todo.html#public"><i class="fa fa-check"></i><b>6.4</b> public</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>参考文献</a></li>
 <li class="divider"></li>
@@ -170,7 +179,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="readr" class="section level1">
 <h1><span class="header-section-number">第 3 章</span> 基本数据的导入</h1>
-<p>基本的数据导入，tidyverse 中的核心包为<code>readr</code>，如果熟悉 <code>read.csv</code> 或其他相似的函数，那么使用 <code>readr</code> 包必然也没有障碍，那么我们先用同样的两种方式，导入相同的 csv 文件，观察其差别：</p>
+<p>基本的数据导入，这里我们先通过 tidyverse 中的核心包为<code>readr</code>，引入 tidyverse 对数据导入的核心观点，如果熟悉 <code>read.csv</code> 或其他相似的函数，那么使用 <code>readr</code> 包必然也没有障碍，那么我们先用同样的两种方式，导入相同的 csv 文件，观察其差别：</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)</code></pre>
 <pre><code>## -- Attaching packages ----------------- tidyverse 1.2.1.9000 --</code></pre>
 <pre><code>## √ ggplot2 3.1.0     √ purrr   0.2.5
@@ -401,9 +410,9 @@ tf<span class="op">$</span>Sepal.Leng</code></pre>
 <li><p><code>parse_double</code> 则是严格的解析方式，必须是浮点类型的<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>，而 <code>parse_number</code> 则相对宽松，我们的问题主要出现在万一你分析的是德国等欧洲国家的数据，反正我第一次看到德国人的发票愣是看了半天才想明白价格。</p></li>
 <li><p><code>parse_character</code> 则是非常容易解析的类型，其复杂也在编码上，对于我们来讲，多数情况是不大可能出错的。</p></li>
 <li><p><code>parse_factor</code> 功能是创建分类变量，对于我们实验数据时用的非常多的。</p></li>
-<li><p><code>parse_datetime</code>, <code>parse_date</code>, <code>parse_time</code> 则是专门解析时间日期的，也是最复杂的，例如常见的英美仪器试剂，ISO 时间以及 CR1000 所采用的 julia day 和 LI-6800 所采用的 unix time 或者叫做 POSIX time 或 Epoch Time。</p></li>
+<li><p><code>parse_datetime</code>, <code>parse_date</code>, <code>parse_time</code> 则是专门解析时间日期的，也是最复杂的，例如常见的英美仪器时间，ISO 时间以及 CR1000 所采用的 julia day 和 LI-6800 所采用的 unix time 或者叫做 POSIX time 或 Epoch Time。</p></li>
 </ul>
-<p>鉴于实际难度和我累了少打字的原则<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>，后面我只介绍因子类和时间日期类.</p>
+<p>鉴于实际难度和我少打字的原则<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>，后面我只简单介绍因子类和时间日期类。</p>
 <div id="factor-str" class="section level3">
 <h3><span class="header-section-number">3.2.1</span> 因子类型</h3>
 <p>因子是 R 中用来创建分类数据的，例如 <code>fitacis</code> 用来批量处理不同处理或小区的光合数据，group 参数用的就是 factor 类型，当然，dataframe 格式自动帮我们完成了从 character 到 factor 的转换。当然，需要注意，factor 是有不同水平的，如同我们实验有处理，处理也要分不同的水平，我觉得这个角度理解 factor 非常实在，尤其是对于 农学、林学、生态背景的我们。如果数据里的水平是你后加的，加的时候漏掉了一个水平，那后果也不是很严重，就是分析不能继续，直到你找到错误：</p>
@@ -425,6 +434,37 @@ tf<span class="op">$</span>Sepal.Leng</code></pre>
 <div id="datetime" class="section level3">
 <h3><span class="header-section-number">3.2.2</span> 时间与日期</h3>
 <p><code>parse_datetime</code> 默认解析的方式非常符合中国人的习惯，采用的是 <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO8601</a>, 年月日及时间的方式，如同我最开始数据导入章节 <a href="readr.html#readr">3</a> 举例时，<code>read_csv</code> 十分准确的识别了这个时间。</p>
+<p>对于仪器中长用的时间类型，无非是 ISO08601 的标准日期，julian day 日期格式<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>，POSIX 时间<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a>，以及欧美时间的格式，处理起来各不相同。这里对时间日期的处理采用 <code>lubridate</code> 来处理：</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(lubridate)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;lubridate&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:base&#39;:
+## 
+##     date</code></pre>
+<div id="iso08601-" class="section level4">
+<h4><span class="header-section-number">3.2.2.1</span> ISO08601 时间及欧美时间的处理</h4>
+<p>这种时间日期的导入绝大部分能够正常识别，如果不能可以以字符型导入，然后进行解析:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ymd_hms</span>(<span class="st">&quot;2019-02-25 21:28:59&quot;</span>)</code></pre>
+<pre><code>## [1] &quot;2019-02-25 21:28:59 UTC&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mdy_hms</span>(<span class="st">&quot;02-25-2019 21:28:59&quot;</span>)</code></pre>
+<pre><code>## [1] &quot;2019-02-25 21:28:59 UTC&quot;</code></pre>
+</div>
+</div>
+</div>
+<div id="julian-day-" class="section level2">
+<h2><span class="header-section-number">3.3</span> Julian day 的转换</h2>
+<p>这个日期尽管看起来奇怪，但是要转换比较容易，<code>base</code> 包即可以。不过我们需要指定起始日期，不然仪器不知道怎么去做，当然，我们既然使用了 <code>lubridate</code>，它也有对应的函数：</p>
+<pre class="sourceCode r"><code class="sourceCode r">jday &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">8</span>, <span class="dv">20</span>, <span class="dv">370</span>)
+<span class="kw">as_date</span>(jday, <span class="dt">origin=</span><span class="st">&quot;2018-01-01&quot;</span>)</code></pre>
+<pre><code>## [1] &quot;2018-01-02&quot; &quot;2018-01-09&quot; &quot;2018-01-21&quot; &quot;2019-01-06&quot;</code></pre>
+<p>这样就一下子搞定了我们的茎流数据的日期了。</p>
+<div id="posix-" class="section level4">
+<h4><span class="header-section-number">3.3.0.1</span> POSIX 日期的转换</h4>
+<p>这个对于广大程序员来讲非常熟悉，但是对于我们生态环境行业来讲，是很恼人的数据，但对于转换来讲,其实也非常简单,如果是有具体的时间，则表示以秒为单位计算，我们可以使用 <code>as_datetime</code>：</p>
+<pre class="sourceCode r"><code class="sourceCode r">epoch &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">100</span>, <span class="fl">2.1e+8</span>)
+<span class="kw">as_datetime</span>(epoch)</code></pre>
+<pre><code>## [1] &quot;1970-01-01 00:00:01 UTC&quot; &quot;1970-01-01 00:01:40 UTC&quot;
+## [3] &quot;1976-08-27 13:20:00 UTC&quot;</code></pre>
 
 
 </div>
@@ -436,6 +476,8 @@ tf<span class="op">$</span>Sepal.Leng</code></pre>
 <li id="fn2"><p>R 内没有 float<a href="readr.html#fnref2" class="footnote-back">↩</a></p></li>
 <li id="fn3"><p>有时候我会把省掉的补充上，如果后面遇到不得不详细讲的内容时。<a href="readr.html#fnref3" class="footnote-back">↩</a></p></li>
 <li id="fn4"><p>农学的童鞋都理解吧，我记得我当时生物统计教材将处理和水平时就用的不同施肥，虽然当时没学好，这么“土的掉渣”的例子我还记得。<a href="readr.html#fnref4" class="footnote-back">↩</a></p></li>
+<li id="fn5"><p>一年当中的第几天<a href="readr.html#fnref5" class="footnote-back">↩</a></p></li>
+<li id="fn6"><p>unix时间，从1970年1月1日开始计算，距离它的秒来几时<a href="readr.html#fnref6" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -444,7 +486,7 @@ tf<span class="op">$</span>Sepal.Leng</code></pre>
         </div>
       </div>
 <a href="prerequisites.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="corereadr.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -481,7 +523,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["bookdown.pdf", "bookdown.epub"],
+"download": ["bookdown.pdf"],
 "toc": {
 "collapse": "none"
 }
