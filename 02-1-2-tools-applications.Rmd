@@ -1,6 +1,111 @@
-# readr 包核心函数及举例 {#corereadr}
+## 常用 package 介绍
+## readr 包核心函数 {#corereadr}
 
-# read_excel
+我们常用的函数，借用 [readr cheetsheet](https://www.rstudio.com/resources/cheatsheets/) 来展示一下其主要用途：
+
+```{r, readrpng, fig.asp = 0.68, echo = FALSE, fig.cap="readr 常用函数图解"}
+knitr::include_graphics("http://wx2.sinaimg.cn/large/8efe7bc9ly1g0n7a72q7mj20h90a1dhe.jpg")
+```
+
+## readxl {#corereadxl}
+
+对于读取 excel 格式的文件，一个函数就足够了：
+
+```{r, eval=FALSE}
+read_excel(path, sheet = NULL, range = NULL, col_names = TRUE,
+  col_types = NULL, na = "", trim_ws = TRUE, skip = 0,
+  n_max = Inf, guess_max = min(1000, n_max),
+  progress = readxl_progress(), .name_repair = "unique")
+```
+
+自动判断 xls 或者 xlsx 格式来读取，遗憾的是，对于 LI-6400 的 xls 格式，它无能为力，无法读取，对于 LI-6800 的 xlsx 格式，不能正确的识别其公式，因为表头太多了，如果单纯只有测量数据的文件，它是没有问题的。
+
+## 二进制文件 {#featherrds}
+
+此处的二进制文件特指 R 原生的 rds 格式和最新的 feather 格式。他们都是轻量级的数据格式，feather 的优势是能够保存 tibble 数据解析的数据格式。至于读取相应类型的数据，则非常容易，对于我们来讲，其读取的意义在于我们将大量的其他格式数据存储为这两种格式后，进行读取，直接是这两种格式的仪器数据，目前来讲应该还没有。
+
+```{r, eval=FALSE}
+readRDS(file, refhook = NULL)
+```
+
+```{r, eval=FALSE}
+read_feather(path, columns = NULL)
+```
+
+## `rio` 万能的瑞士军刀 {#rio}
+
+前面几节介绍读取数据的函数是走马观花，蜻蜓点水的方式，不是故意偷懒，是因为本节内容才是重点，之所以标题将 `rio` 称之为万能的瑞士军刀，是因为其功能决定的： `rio` 实际上属于作者对 `data.table`、`haven`、`readxl` 等一系列软件包相关函数的打包，然后将格式的识别自动化，减少了我们的工作量，主要特点为：
+
+* 使用扩展名来识别文件类型，减少人工输入的工作量，若是格式无法识别，则可以通过指定 format 来导入。
+
+* [reader](https://cran.r-project.org/web/packages/reader/index.html) 用来处理常见的文本数据，无需指定特定的数据类型。
+
+* [io](https://cran.r-project.org/package=io) 处理自定义数据格式。
+
+* [ImportExport](https://cran.r-project.org/package=ImportExport) 集中于处理 excel、SPSS 等二进制文件并提供 shiny 的界面。
+
+* [SchemaOnRead](https://cran.r-project.org/package=SchemaOnRead) 则是通过一系列的迭代找到最合适的读取数据的方法。
+
+值得一提的是，`rio` 尽管使用了 base 函数读取数据，但他从不将字符串当作因子类型处理，遵循 tidyverse 的原则。我们通过举例来完成相关函数的介绍：
+
+### 安装 {#insrio}
+
+`rio` 安装略微不同于其他软件包，安装好之后，我们最好通过 `install_formats()` 命令进一步安装其他缺失的软件包，以进一步获得完整的数据格式的支持。
+
+```{r, eval=FALSE}
+install.packages("rio")
+library(rio)
+install_formats()
+```
+
+### 数据的读取 {#imp-rio}
+
+读取数据时，我们可以忘掉原来那一系列函数，只需记得 `import` 即可：
+
+#### 读取 csv 格式数据 {#riocsv}
+
+```{r}
+library(rio)
+aci <- import("./data/aci6800.csv")
+```
+
+当然，这不足以显示 rio 的优势，因为这种简单格式对 `read.csv` 也不费力，那我们来点高级的，我这里有一个文件夹，里面放了 4 个 csv 文件：
+
+```{r}
+library(plantecophys)
+paths <- Sys.glob("./data/multi_csv/*.csv")
+all_data <- import_list(paths)
+fits <- lapply(all_data, fitaci, fitmethod = "bilinear")
+fits$aci4$pars
+```
+有了 `import_list`，是不是连 `fitacis` 也显得多余了？我们无需用 `lapply` 导入所有数据再合并数据，并加入一列 factor 来区分我们的数据，省时省力，怎么能叫人不喜欢呢？
+
+#### 读取 excel 格式数据 {#rioexc}
+
+对于 excel 格式的数据读取，我们只需要正确的输入文件名和扩展名即可，不用管它是 xls 还是 xlsx 的格式。下面我有一个 叫做 aci01.xls 的文件，里面有多个 sheet，我们来读取一个叫做 aci2 的 sheet 内的数据：
+
+```{r}
+aci2 <- import("./data/aci01.xls", sheet = "aci2")
+```
+
+当然，多数时候我们的数据都是只有一个 sheet 的，或者像我一样不喜欢把所有数据都 分 sheet 放在一个文件的人也很多，所以我们很多时候是不需要这个 `sheet = "aci2` 这个参数的，但对于某些仪器，一次导出多个 excel 文件也不时很实用，我们需要的数据恰恰又放在了某个 sheet 中，就很实用了，例如 METERS 的仪器喜欢这么做，拿 SATURO 双水头来讲，如果我们需要原始数据来做处理分析：
+
+```{r}
+raw_data <- import("./data/clay1.xlsx", sheet = "Raw Data")
+knitr::kable(head(raw_data))
+```
+
+那如果就是喜欢把所有数据放到一个文件里怎么办，答案我们已经见过：
+
+```{r}
+all_aci <- import_list("./data/aci01.xls")
+attributes(all_aci)
+```
+如果要进一步处理，参考 \@ref(riocsv) 内容
+
+
+
+
 
 
 \cleardoublepage

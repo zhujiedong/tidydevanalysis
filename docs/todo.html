@@ -5,34 +5,34 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>第 6 章 todo | 使用 tidyverse 的方式分析仪器测量的数据</title>
-  <meta name="description" content="第 6 章 todo | 使用 tidyverse 的方式分析仪器测量的数据">
+  <title>第 4 章 todo | 使用 tidyverse 的方式分析仪器测量的数据</title>
+  <meta name="description" content="第 4 章 todo | 使用 tidyverse 的方式分析仪器测量的数据">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="第 6 章 todo | 使用 tidyverse 的方式分析仪器测量的数据" />
+  <meta property="og:title" content="第 4 章 todo | 使用 tidyverse 的方式分析仪器测量的数据" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="images/coverpage.png" />
-  <meta property="og:description" content="第 6 章 todo | 使用 tidyverse 的方式分析仪器测量的数据" />
+  <meta property="og:description" content="第 4 章 todo | 使用 tidyverse 的方式分析仪器测量的数据" />
   <meta name="github-repo" content="zhujiedong/tidydevanalysis" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="第 6 章 todo | 使用 tidyverse 的方式分析仪器测量的数据" />
+  <meta name="twitter:title" content="第 4 章 todo | 使用 tidyverse 的方式分析仪器测量的数据" />
   
-  <meta name="twitter:description" content="第 6 章 todo | 使用 tidyverse 的方式分析仪器测量的数据" />
+  <meta name="twitter:description" content="第 4 章 todo | 使用 tidyverse 的方式分析仪器测量的数据" />
   <meta name="twitter:image" content="images/coverpage.png" />
 
 <meta name="author" content="祝介东    北京力高泰科技有限公司">
 
 
-<meta name="date" content="2019-02-25">
+<meta name="date" content="2019-03-14">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="read-excel.html">
+<link rel="prev" href="readr.html">
 <link rel="next" href="references.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -140,21 +140,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="2" data-path="prerequisites.html"><a href="prerequisites.html"><i class="fa fa-check"></i><b>2</b> 准备工作</a></li>
 <li class="part"><span><b>II Part II</b></span></li>
-<li class="chapter" data-level="3" data-path="readr.html"><a href="readr.html"><i class="fa fa-check"></i><b>3</b> 基本数据的导入</a><ul>
+<li class="chapter" data-level="3" data-path="readr.html"><a href="readr.html"><i class="fa fa-check"></i><b>3</b> tidyverse 数据格式</a><ul>
 <li class="chapter" data-level="3.1" data-path="readr.html"><a href="readr.html#attridiff"><i class="fa fa-check"></i><b>3.1</b> 属性的差别</a></li>
 <li class="chapter" data-level="3.2" data-path="readr.html"><a href="readr.html#parse-str"><i class="fa fa-check"></i><b>3.2</b> 数据类型的解析</a><ul>
 <li class="chapter" data-level="3.2.1" data-path="readr.html"><a href="readr.html#factor-str"><i class="fa fa-check"></i><b>3.2.1</b> 因子类型</a></li>
 <li class="chapter" data-level="3.2.2" data-path="readr.html"><a href="readr.html#datetime"><i class="fa fa-check"></i><b>3.2.2</b> 时间与日期</a></li>
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="readr.html"><a href="readr.html#julian-day-"><i class="fa fa-check"></i><b>3.3</b> Julian day 的转换</a></li>
+<li class="chapter" data-level="3.4" data-path="readr.html"><a href="readr.html#package-"><i class="fa fa-check"></i><b>3.4</b> 常用 package 介绍</a></li>
+<li class="chapter" data-level="3.5" data-path="readr.html"><a href="readr.html#corereadr"><i class="fa fa-check"></i><b>3.5</b> readr 包核心函数</a></li>
+<li class="chapter" data-level="3.6" data-path="readr.html"><a href="readr.html#corereadxl"><i class="fa fa-check"></i><b>3.6</b> readxl</a></li>
+<li class="chapter" data-level="3.7" data-path="readr.html"><a href="readr.html#featherrds"><i class="fa fa-check"></i><b>3.7</b> 二进制文件</a></li>
+<li class="chapter" data-level="3.8" data-path="readr.html"><a href="readr.html#rio"><i class="fa fa-check"></i><b>3.8</b> <code>rio</code> 万能的瑞士军刀</a><ul>
+<li class="chapter" data-level="3.8.1" data-path="readr.html"><a href="readr.html#insrio"><i class="fa fa-check"></i><b>3.8.1</b> 安装</a></li>
+<li class="chapter" data-level="3.8.2" data-path="readr.html"><a href="readr.html#imp-rio"><i class="fa fa-check"></i><b>3.8.2</b> 数据的读取</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="corereadr.html"><a href="corereadr.html"><i class="fa fa-check"></i><b>4</b> readr 包核心函数及举例</a></li>
-<li class="chapter" data-level="5" data-path="read-excel.html"><a href="read-excel.html"><i class="fa fa-check"></i><b>5</b> read_excel</a></li>
-<li class="chapter" data-level="6" data-path="todo.html"><a href="todo.html"><i class="fa fa-check"></i><b>6</b> todo</a><ul>
-<li class="chapter" data-level="6.1" data-path="todo.html"><a href="todo.html#data-transformation"><i class="fa fa-check"></i><b>6.1</b> data transformation</a></li>
-<li class="chapter" data-level="6.2" data-path="todo.html"><a href="todo.html#data-visulization"><i class="fa fa-check"></i><b>6.2</b> data visulization</a></li>
-<li class="chapter" data-level="6.3" data-path="todo.html"><a href="todo.html#model-r"><i class="fa fa-check"></i><b>6.3</b> model r</a></li>
-<li class="chapter" data-level="6.4" data-path="todo.html"><a href="todo.html#public"><i class="fa fa-check"></i><b>6.4</b> public</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="todo.html"><a href="todo.html"><i class="fa fa-check"></i><b>4</b> todo</a><ul>
+<li class="chapter" data-level="4.1" data-path="todo.html"><a href="todo.html#data-transformation"><i class="fa fa-check"></i><b>4.1</b> data transformation</a></li>
+<li class="chapter" data-level="4.2" data-path="todo.html"><a href="todo.html#data-visulization"><i class="fa fa-check"></i><b>4.2</b> data visulization</a></li>
+<li class="chapter" data-level="4.3" data-path="todo.html"><a href="todo.html#model-r"><i class="fa fa-check"></i><b>4.3</b> model r</a></li>
+<li class="chapter" data-level="4.4" data-path="todo.html"><a href="todo.html#public"><i class="fa fa-check"></i><b>4.4</b> public</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>参考文献</a></li>
 <li class="divider"></li>
@@ -178,18 +184,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="todo" class="section level1">
-<h1><span class="header-section-number">第 6 章</span> todo</h1>
+<h1><span class="header-section-number">第 4 章</span> todo</h1>
 <div id="data-transformation" class="section level2">
-<h2><span class="header-section-number">6.1</span> data transformation</h2>
+<h2><span class="header-section-number">4.1</span> data transformation</h2>
 </div>
 <div id="data-visulization" class="section level2">
-<h2><span class="header-section-number">6.2</span> data visulization</h2>
+<h2><span class="header-section-number">4.2</span> data visulization</h2>
 </div>
 <div id="model-r" class="section level2">
-<h2><span class="header-section-number">6.3</span> model r</h2>
+<h2><span class="header-section-number">4.3</span> model r</h2>
 </div>
 <div id="public" class="section level2">
-<h2><span class="header-section-number">6.4</span> public</h2>
+<h2><span class="header-section-number">4.4</span> public</h2>
 
 </div>
 </div>
@@ -198,7 +204,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="read-excel.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="readr.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

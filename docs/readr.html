@@ -5,27 +5,27 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>第 3 章 基本数据的导入 | 使用 tidyverse 的方式分析仪器测量的数据</title>
-  <meta name="description" content="第 3 章 基本数据的导入 | 使用 tidyverse 的方式分析仪器测量的数据">
+  <title>第 3 章 tidyverse 数据格式 | 使用 tidyverse 的方式分析仪器测量的数据</title>
+  <meta name="description" content="第 3 章 tidyverse 数据格式 | 使用 tidyverse 的方式分析仪器测量的数据">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="第 3 章 基本数据的导入 | 使用 tidyverse 的方式分析仪器测量的数据" />
+  <meta property="og:title" content="第 3 章 tidyverse 数据格式 | 使用 tidyverse 的方式分析仪器测量的数据" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="images/coverpage.png" />
-  <meta property="og:description" content="第 3 章 基本数据的导入 | 使用 tidyverse 的方式分析仪器测量的数据" />
+  <meta property="og:description" content="第 3 章 tidyverse 数据格式 | 使用 tidyverse 的方式分析仪器测量的数据" />
   <meta name="github-repo" content="zhujiedong/tidydevanalysis" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="第 3 章 基本数据的导入 | 使用 tidyverse 的方式分析仪器测量的数据" />
+  <meta name="twitter:title" content="第 3 章 tidyverse 数据格式 | 使用 tidyverse 的方式分析仪器测量的数据" />
   
-  <meta name="twitter:description" content="第 3 章 基本数据的导入 | 使用 tidyverse 的方式分析仪器测量的数据" />
+  <meta name="twitter:description" content="第 3 章 tidyverse 数据格式 | 使用 tidyverse 的方式分析仪器测量的数据" />
   <meta name="twitter:image" content="images/coverpage.png" />
 
 <meta name="author" content="祝介东    北京力高泰科技有限公司">
 
 
-<meta name="date" content="2019-02-25">
+<meta name="date" content="2019-03-14">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -33,7 +33,7 @@
   
   
 <link rel="prev" href="prerequisites.html">
-<link rel="next" href="corereadr.html">
+<link rel="next" href="todo.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -140,21 +140,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="2" data-path="prerequisites.html"><a href="prerequisites.html"><i class="fa fa-check"></i><b>2</b> 准备工作</a></li>
 <li class="part"><span><b>II Part II</b></span></li>
-<li class="chapter" data-level="3" data-path="readr.html"><a href="readr.html"><i class="fa fa-check"></i><b>3</b> 基本数据的导入</a><ul>
+<li class="chapter" data-level="3" data-path="readr.html"><a href="readr.html"><i class="fa fa-check"></i><b>3</b> tidyverse 数据格式</a><ul>
 <li class="chapter" data-level="3.1" data-path="readr.html"><a href="readr.html#attridiff"><i class="fa fa-check"></i><b>3.1</b> 属性的差别</a></li>
 <li class="chapter" data-level="3.2" data-path="readr.html"><a href="readr.html#parse-str"><i class="fa fa-check"></i><b>3.2</b> 数据类型的解析</a><ul>
 <li class="chapter" data-level="3.2.1" data-path="readr.html"><a href="readr.html#factor-str"><i class="fa fa-check"></i><b>3.2.1</b> 因子类型</a></li>
 <li class="chapter" data-level="3.2.2" data-path="readr.html"><a href="readr.html#datetime"><i class="fa fa-check"></i><b>3.2.2</b> 时间与日期</a></li>
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="readr.html"><a href="readr.html#julian-day-"><i class="fa fa-check"></i><b>3.3</b> Julian day 的转换</a></li>
+<li class="chapter" data-level="3.4" data-path="readr.html"><a href="readr.html#package-"><i class="fa fa-check"></i><b>3.4</b> 常用 package 介绍</a></li>
+<li class="chapter" data-level="3.5" data-path="readr.html"><a href="readr.html#corereadr"><i class="fa fa-check"></i><b>3.5</b> readr 包核心函数</a></li>
+<li class="chapter" data-level="3.6" data-path="readr.html"><a href="readr.html#corereadxl"><i class="fa fa-check"></i><b>3.6</b> readxl</a></li>
+<li class="chapter" data-level="3.7" data-path="readr.html"><a href="readr.html#featherrds"><i class="fa fa-check"></i><b>3.7</b> 二进制文件</a></li>
+<li class="chapter" data-level="3.8" data-path="readr.html"><a href="readr.html#rio"><i class="fa fa-check"></i><b>3.8</b> <code>rio</code> 万能的瑞士军刀</a><ul>
+<li class="chapter" data-level="3.8.1" data-path="readr.html"><a href="readr.html#insrio"><i class="fa fa-check"></i><b>3.8.1</b> 安装</a></li>
+<li class="chapter" data-level="3.8.2" data-path="readr.html"><a href="readr.html#imp-rio"><i class="fa fa-check"></i><b>3.8.2</b> 数据的读取</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="corereadr.html"><a href="corereadr.html"><i class="fa fa-check"></i><b>4</b> readr 包核心函数及举例</a></li>
-<li class="chapter" data-level="5" data-path="read-excel.html"><a href="read-excel.html"><i class="fa fa-check"></i><b>5</b> read_excel</a></li>
-<li class="chapter" data-level="6" data-path="todo.html"><a href="todo.html"><i class="fa fa-check"></i><b>6</b> todo</a><ul>
-<li class="chapter" data-level="6.1" data-path="todo.html"><a href="todo.html#data-transformation"><i class="fa fa-check"></i><b>6.1</b> data transformation</a></li>
-<li class="chapter" data-level="6.2" data-path="todo.html"><a href="todo.html#data-visulization"><i class="fa fa-check"></i><b>6.2</b> data visulization</a></li>
-<li class="chapter" data-level="6.3" data-path="todo.html"><a href="todo.html#model-r"><i class="fa fa-check"></i><b>6.3</b> model r</a></li>
-<li class="chapter" data-level="6.4" data-path="todo.html"><a href="todo.html#public"><i class="fa fa-check"></i><b>6.4</b> public</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="todo.html"><a href="todo.html"><i class="fa fa-check"></i><b>4</b> todo</a><ul>
+<li class="chapter" data-level="4.1" data-path="todo.html"><a href="todo.html#data-transformation"><i class="fa fa-check"></i><b>4.1</b> data transformation</a></li>
+<li class="chapter" data-level="4.2" data-path="todo.html"><a href="todo.html#data-visulization"><i class="fa fa-check"></i><b>4.2</b> data visulization</a></li>
+<li class="chapter" data-level="4.3" data-path="todo.html"><a href="todo.html#model-r"><i class="fa fa-check"></i><b>4.3</b> model r</a></li>
+<li class="chapter" data-level="4.4" data-path="todo.html"><a href="todo.html#public"><i class="fa fa-check"></i><b>4.4</b> public</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>参考文献</a></li>
 <li class="divider"></li>
@@ -178,7 +184,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="readr" class="section level1">
-<h1><span class="header-section-number">第 3 章</span> 基本数据的导入</h1>
+<h1><span class="header-section-number">第 3 章</span> tidyverse 数据格式</h1>
 <p>基本的数据导入，这里我们先通过 tidyverse 中的核心包为<code>readr</code>，引入 tidyverse 对数据导入的核心观点，如果熟悉 <code>read.csv</code> 或其他相似的函数，那么使用 <code>readr</code> 包必然也没有障碍，那么我们先用同样的两种方式，导入相同的 csv 文件，观察其差别：</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)</code></pre>
 <pre><code>## -- Attaching packages ----------------- tidyverse 1.2.1.9000 --</code></pre>
@@ -460,13 +466,158 @@ tf<span class="op">$</span>Sepal.Leng</code></pre>
 <p>这样就一下子搞定了我们的茎流数据的日期了。</p>
 <div id="posix-" class="section level4">
 <h4><span class="header-section-number">3.3.0.1</span> POSIX 日期的转换</h4>
-<p>这个对于广大程序员来讲非常熟悉，但是对于我们生态环境行业来讲，是很恼人的数据，但对于转换来讲,其实也非常简单,如果是有具体的时间，则表示以秒为单位计算，我们可以使用 <code>as_datetime</code>：</p>
+<p>这个对于广大程序员来讲非常熟悉，但是对于我们生态环境行业来讲，是对人类很不友好的数据格式，但对于转换来讲,其实也非常简单,如果是有具体的时间，则表示以秒为单位计算，我们可以使用 <code>as_datetime</code>：</p>
 <pre class="sourceCode r"><code class="sourceCode r">epoch &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">100</span>, <span class="fl">2.1e+8</span>)
 <span class="kw">as_datetime</span>(epoch)</code></pre>
 <pre><code>## [1] &quot;1970-01-01 00:00:01 UTC&quot; &quot;1970-01-01 00:01:40 UTC&quot;
 ## [3] &quot;1976-08-27 13:20:00 UTC&quot;</code></pre>
 
 
+</div>
+</div>
+<div id="package-" class="section level2">
+<h2><span class="header-section-number">3.4</span> 常用 package 介绍</h2>
+</div>
+<div id="corereadr" class="section level2">
+<h2><span class="header-section-number">3.5</span> readr 包核心函数</h2>
+<p>我们常用的函数，借用 <a href="https://www.rstudio.com/resources/cheatsheets/">readr cheetsheet</a> 来展示一下其主要用途：</p>
+<div class="figure"><span id="fig:readrpng"></span>
+<img src="http://wx2.sinaimg.cn/large/8efe7bc9ly1g0n7a72q7mj20h90a1dhe.jpg" alt="readr 常用函数图解"  />
+<p class="caption">
+图 3.1: readr 常用函数图解
+</p>
+</div>
+</div>
+<div id="corereadxl" class="section level2">
+<h2><span class="header-section-number">3.6</span> readxl</h2>
+<p>对于读取 excel 格式的文件，一个函数就足够了：</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_excel</span>(path, <span class="dt">sheet =</span> <span class="ot">NULL</span>, <span class="dt">range =</span> <span class="ot">NULL</span>, <span class="dt">col_names =</span> <span class="ot">TRUE</span>,
+  <span class="dt">col_types =</span> <span class="ot">NULL</span>, <span class="dt">na =</span> <span class="st">&quot;&quot;</span>, <span class="dt">trim_ws =</span> <span class="ot">TRUE</span>, <span class="dt">skip =</span> <span class="dv">0</span>,
+  <span class="dt">n_max =</span> <span class="ot">Inf</span>, <span class="dt">guess_max =</span> <span class="kw">min</span>(<span class="dv">1000</span>, n_max),
+  <span class="dt">progress =</span> <span class="kw">readxl_progress</span>(), <span class="dt">.name_repair =</span> <span class="st">&quot;unique&quot;</span>)</code></pre>
+<p>自动判断 xls 或者 xlsx 格式来读取，遗憾的是，对于 LI-6400 的 xls 格式，它无能为力，无法读取，对于 LI-6800 的 xlsx 格式，不能正确的识别其公式，因为表头太多了，如果单纯只有测量数据的文件，它是没有问题的。</p>
+</div>
+<div id="featherrds" class="section level2">
+<h2><span class="header-section-number">3.7</span> 二进制文件</h2>
+<p>此处的二进制文件特指 R 原生的 rds 格式和最新的 feather 格式。他们都是轻量级的数据格式，feather 的优势是能够保存 tibble 数据解析的数据格式。至于读取相应类型的数据，则非常容易，对于我们来讲，其读取的意义在于我们将大量的其他格式数据存储为这两种格式后，进行读取，直接是这两种格式的仪器数据，目前来讲应该还没有。</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">readRDS</span>(file, <span class="dt">refhook =</span> <span class="ot">NULL</span>)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_feather</span>(path, <span class="dt">columns =</span> <span class="ot">NULL</span>)</code></pre>
+</div>
+<div id="rio" class="section level2">
+<h2><span class="header-section-number">3.8</span> <code>rio</code> 万能的瑞士军刀</h2>
+<p>前面几节介绍读取数据的函数是走马观花，蜻蜓点水的方式，不是故意偷懒，是因为本节内容才是重点，之所以标题将 <code>rio</code> 称之为万能的瑞士军刀，是因为其功能决定的： <code>rio</code> 实际上属于作者对 <code>data.table</code>、<code>haven</code>、<code>readxl</code> 等一系列软件包相关函数的打包，然后将格式的识别自动化，减少了我们的工作量，主要特点为：</p>
+<ul>
+<li><p>使用扩展名来识别文件类型，减少人工输入的工作量，若是格式无法识别，则可以通过指定 format 来导入。</p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/reader/index.html">reader</a> 用来处理常见的文本数据，无需指定特定的数据类型。</p></li>
+<li><p><a href="https://cran.r-project.org/package=io">io</a> 处理自定义数据格式。</p></li>
+<li><p><a href="https://cran.r-project.org/package=ImportExport">ImportExport</a> 集中于处理 excel、SPSS 等二进制文件并提供 shiny 的界面。</p></li>
+<li><p><a href="https://cran.r-project.org/package=SchemaOnRead">SchemaOnRead</a> 则是通过一系列的迭代找到最合适的读取数据的方法。</p></li>
+</ul>
+<p>值得一提的是，<code>rio</code> 尽管使用了 base 函数读取数据，但他从不将字符串当作因子类型处理，遵循 tidyverse 的原则。我们通过举例来完成相关函数的介绍：</p>
+<div id="insrio" class="section level3">
+<h3><span class="header-section-number">3.8.1</span> 安装</h3>
+<p><code>rio</code> 安装略微不同于其他软件包，安装好之后，我们最好通过 <code>install_formats()</code> 命令进一步安装其他缺失的软件包，以进一步获得完整的数据格式的支持。</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;rio&quot;</span>)
+<span class="kw">library</span>(rio)
+<span class="kw">install_formats</span>()</code></pre>
+</div>
+<div id="imp-rio" class="section level3">
+<h3><span class="header-section-number">3.8.2</span> 数据的读取</h3>
+<p>读取数据时，我们可以忘掉原来那一系列函数，只需记得 <code>import</code> 即可：</p>
+<div id="riocsv" class="section level4">
+<h4><span class="header-section-number">3.8.2.1</span> 读取 csv 格式数据</h4>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(rio)
+aci &lt;-<span class="st"> </span><span class="kw">import</span>(<span class="st">&quot;./data/aci6800.csv&quot;</span>)</code></pre>
+<p>当然，这不足以显示 rio 的优势，因为这种简单格式对 <code>read.csv</code> 也不费力，那我们来点高级的，我这里有一个文件夹，里面放了 4 个 csv 文件：</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(plantecophys)
+paths &lt;-<span class="st"> </span><span class="kw">Sys.glob</span>(<span class="st">&quot;./data/multi_csv/*.csv&quot;</span>)
+all_data &lt;-<span class="st"> </span><span class="kw">import_list</span>(paths)
+fits &lt;-<span class="st"> </span><span class="kw">lapply</span>(all_data, fitaci, <span class="dt">fitmethod =</span> <span class="st">&quot;bilinear&quot;</span>)
+fits<span class="op">$</span>aci4<span class="op">$</span>pars</code></pre>
+<pre><code>##          Estimate Std. Error
+## Vcmax  49.3787547  3.4815555
+## Jmax  128.5546403         NA
+## Rd      0.3828608  0.4697008</code></pre>
+<p>有了 <code>import_list</code>，是不是连 <code>fitacis</code> 也显得多余了？我们无需用 <code>lapply</code> 导入所有数据再合并数据，并加入一列 factor 来区分我们的数据，省时省力，怎么能叫人不喜欢呢？</p>
+</div>
+<div id="rioexc" class="section level4">
+<h4><span class="header-section-number">3.8.2.2</span> 读取 excel 格式数据</h4>
+<p>对于 excel 格式的数据读取，我们只需要正确的输入文件名和扩展名即可，不用管它是 xls 还是 xlsx 的格式。下面我有一个 叫做 aci01.xls 的文件，里面有多个 sheet，我们来读取一个叫做 aci2 的 sheet 内的数据：</p>
+<pre class="sourceCode r"><code class="sourceCode r">aci2 &lt;-<span class="st"> </span><span class="kw">import</span>(<span class="st">&quot;./data/aci01.xls&quot;</span>, <span class="dt">sheet =</span> <span class="st">&quot;aci2&quot;</span>)</code></pre>
+<p>当然，多数时候我们的数据都是只有一个 sheet 的，或者像我一样不喜欢把所有数据都 分 sheet 放在一个文件的人也很多，所以我们很多时候是不需要这个 <code>sheet = "aci2</code> 这个参数的，但对于某些仪器，一次导出多个 excel 文件也不时很实用，我们需要的数据恰恰又放在了某个 sheet 中，就很实用了，例如 METERS 的仪器喜欢这么做，拿 SATURO 双水头来讲，如果我们需要原始数据来做处理分析：</p>
+<pre class="sourceCode r"><code class="sourceCode r">raw_data &lt;-<span class="st"> </span><span class="kw">import</span>(<span class="st">&quot;./data/clay1.xlsx&quot;</span>, <span class="dt">sheet =</span> <span class="st">&quot;Raw Data&quot;</span>)
+knitr<span class="op">::</span><span class="kw">kable</span>(<span class="kw">head</span>(raw_data))</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="right">Record ID</th>
+<th align="right">Time (min)</th>
+<th align="right">Water Level (cm)</th>
+<th align="right">Pressure (cm)</th>
+<th align="right">Flux (cm/s)</th>
+<th align="right">Volume (mL/s)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">4</td>
+<td align="right">1</td>
+<td align="right">4.35</td>
+<td align="right">5.506</td>
+<td align="right">0.00122</td>
+<td align="right">0.2225459</td>
+</tr>
+<tr class="even">
+<td align="right">5</td>
+<td align="right">2</td>
+<td align="right">5.07</td>
+<td align="right">4.094</td>
+<td align="right">0.00000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="right">6</td>
+<td align="right">3</td>
+<td align="right">4.97</td>
+<td align="right">4.838</td>
+<td align="right">0.00323</td>
+<td align="right">0.5891995</td>
+</tr>
+<tr class="even">
+<td align="right">7</td>
+<td align="right">4</td>
+<td align="right">4.94</td>
+<td align="right">5.605</td>
+<td align="right">0.00616</td>
+<td align="right">1.1236745</td>
+</tr>
+<tr class="odd">
+<td align="right">8</td>
+<td align="right">5</td>
+<td align="right">4.95</td>
+<td align="right">5.264</td>
+<td align="right">0.00476</td>
+<td align="right">0.8682939</td>
+</tr>
+<tr class="even">
+<td align="right">9</td>
+<td align="right">6</td>
+<td align="right">4.94</td>
+<td align="right">5.424</td>
+<td align="right">0.00555</td>
+<td align="right">1.0124015</td>
+</tr>
+</tbody>
+</table>
+<p>那如果就是喜欢把所有数据放到一个文件里怎么办，答案我们已经见过：</p>
+<pre class="sourceCode r"><code class="sourceCode r">all_aci &lt;-<span class="st"> </span><span class="kw">import_list</span>(<span class="st">&quot;./data/aci01.xls&quot;</span>)
+<span class="kw">attributes</span>(all_aci)</code></pre>
+<pre><code>## $names
+## [1] &quot;aci1&quot; &quot;aci2&quot; &quot;aci3&quot;</code></pre>
+<p>如果要进一步处理，参考 <a href="readr.html#riocsv">3.8.2.1</a> 内容</p>
+
+
+</div>
 </div>
 </div>
 </div>
@@ -486,7 +637,7 @@ tf<span class="op">$</span>Sepal.Leng</code></pre>
         </div>
       </div>
 <a href="prerequisites.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="corereadr.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="todo.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
