@@ -32,7 +32,7 @@ readRDS(file, refhook = NULL)
 read_feather(path, columns = NULL)
 ```
 
-## `rio` 万能的瑞士军刀 {#rio}
+## `rio`--万能的瑞士军刀 {#rio}
 
 前面几节介绍读取数据的函数是走马观花，蜻蜓点水的方式，不是故意偷懒，是因为本节内容才是重点，之所以标题将 `rio` 称之为万能的瑞士军刀，是因为其功能决定的： `rio` 实际上属于作者对 `data.table`、`haven`、`readxl` 等一系列软件包相关函数的打包，然后将格式的识别自动化，减少了我们的工作量，主要特点为：
 
@@ -101,11 +101,23 @@ knitr::kable(head(raw_data))
 all_aci <- import_list("./data/aci01.xls")
 attributes(all_aci)
 ```
-如果要进一步处理，参考 \@ref(riocsv) 内容
+如果要进一步处理，参考 \@ref(riocsv) 内容。
 
+#### 文本文件的处理 {#riotext}
 
+以上两种格式常见，但有时我们会遇到其他文本格式的数据，即虽然数据为文本格式，但都带有其他特别的后缀，例如 CR1000 的数据，如果你曾经用文本编辑器打开过 CR1000 的数据，很容易看到他是用逗号分隔的，那么我们看一下 `rio` 的表现：
 
+```{r}
+crdata <- import("./data/weather.dat", format = ",", skip = 1)
+knitr::kable(head(crdata))
+```
+不太好的情况是，我们导入了表头下面的一行不需要的内容，这个我们先忽略，后面再处理。
 
+对于 LI-840 等 txt 数据，喜欢用空格分列，使用 `rio` 的效果非常好，直接自动删除了第一个头文件的日期，读取了我测量的数据：
 
+```{r}
+li840 <- import("./data/li840.txt")
+knitr::kable(head(li840))
+```
 
 \cleardoublepage

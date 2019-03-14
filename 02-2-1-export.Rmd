@@ -1,0 +1,31 @@
+# 使用 `rio` 导出数据 {#rioexport}
+
+与导入数据函数相比，基本上 R 内都有其相对应的导出数据的函数，但为了节省版面，外加这两天培训实在有点累，我们直接进入正题，还是直接进入 “Swiss-Army Knife” 的解决方案：
+
+如果是导入的数据，那么非常容易解决，例如刚刚导入的 CR1000 的数据：
+
+```{r, eval=FALSE}
+exprot(crdata, "./data/crdata.csv")
+```
+
+如果我想导出多个 dataframe，也非常简单：
+
+
+```{r, eval=FALSE}
+exprot(all_aci, "./data/all_aci.xlsx")
+```
+
+也就是第一个参数为多个 dataframe 组成的 list，然后可以将单个 dataframe 导入 excel 不同的 sheet 内。
+
+## 数据的转换 {#rioconvert}
+
+`rio` 数据的转换其实并不奇怪，他是先讲数据导入，然后再导出，目的在于导出，所以我们将它放在了导出数据的内容内。
+
+```{r, eval=FALSE}
+convert("./data/aci.csv", "./data/aci.feather")
+```
+
+**注：转换为 feather 格式，并非耍酷的需要，主要目的有三，一是该格式数据轻量级的，占地方小，二是他是 R 和 python 通用的格式，三是这是二进制格式，文本打开一堆乱码，有一定安全意义**，次要目的是耍酷。
+
+
+\cleardoublepage

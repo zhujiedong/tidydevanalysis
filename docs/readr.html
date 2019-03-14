@@ -33,7 +33,7 @@
   
   
 <link rel="prev" href="prerequisites.html">
-<link rel="next" href="todo.html">
+<link rel="next" href="rioexport.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -151,16 +151,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.5" data-path="readr.html"><a href="readr.html#corereadr"><i class="fa fa-check"></i><b>3.5</b> readr 包核心函数</a></li>
 <li class="chapter" data-level="3.6" data-path="readr.html"><a href="readr.html#corereadxl"><i class="fa fa-check"></i><b>3.6</b> readxl</a></li>
 <li class="chapter" data-level="3.7" data-path="readr.html"><a href="readr.html#featherrds"><i class="fa fa-check"></i><b>3.7</b> 二进制文件</a></li>
-<li class="chapter" data-level="3.8" data-path="readr.html"><a href="readr.html#rio"><i class="fa fa-check"></i><b>3.8</b> <code>rio</code> 万能的瑞士军刀</a><ul>
+<li class="chapter" data-level="3.8" data-path="readr.html"><a href="readr.html#rio"><i class="fa fa-check"></i><b>3.8</b> <code>rio</code>–万能的瑞士军刀</a><ul>
 <li class="chapter" data-level="3.8.1" data-path="readr.html"><a href="readr.html#insrio"><i class="fa fa-check"></i><b>3.8.1</b> 安装</a></li>
 <li class="chapter" data-level="3.8.2" data-path="readr.html"><a href="readr.html#imp-rio"><i class="fa fa-check"></i><b>3.8.2</b> 数据的读取</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="todo.html"><a href="todo.html"><i class="fa fa-check"></i><b>4</b> todo</a><ul>
-<li class="chapter" data-level="4.1" data-path="todo.html"><a href="todo.html#data-transformation"><i class="fa fa-check"></i><b>4.1</b> data transformation</a></li>
-<li class="chapter" data-level="4.2" data-path="todo.html"><a href="todo.html#data-visulization"><i class="fa fa-check"></i><b>4.2</b> data visulization</a></li>
-<li class="chapter" data-level="4.3" data-path="todo.html"><a href="todo.html#model-r"><i class="fa fa-check"></i><b>4.3</b> model r</a></li>
-<li class="chapter" data-level="4.4" data-path="todo.html"><a href="todo.html#public"><i class="fa fa-check"></i><b>4.4</b> public</a></li>
+<li class="chapter" data-level="4" data-path="rioexport.html"><a href="rioexport.html"><i class="fa fa-check"></i><b>4</b> 使用 <code>rio</code> 导出数据</a><ul>
+<li class="chapter" data-level="4.1" data-path="rioexport.html"><a href="rioexport.html#rioconvert"><i class="fa fa-check"></i><b>4.1</b> 数据的转换</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="todo.html"><a href="todo.html"><i class="fa fa-check"></i><b>5</b> todo</a><ul>
+<li class="chapter" data-level="5.1" data-path="todo.html"><a href="todo.html#data-transformation"><i class="fa fa-check"></i><b>5.1</b> data transformation</a></li>
+<li class="chapter" data-level="5.2" data-path="todo.html"><a href="todo.html#data-visulization"><i class="fa fa-check"></i><b>5.2</b> data visulization</a></li>
+<li class="chapter" data-level="5.3" data-path="todo.html"><a href="todo.html#model-r"><i class="fa fa-check"></i><b>5.3</b> model r</a></li>
+<li class="chapter" data-level="5.4" data-path="todo.html"><a href="todo.html#public"><i class="fa fa-check"></i><b>5.4</b> public</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>参考文献</a></li>
 <li class="divider"></li>
@@ -504,7 +507,7 @@ tf<span class="op">$</span>Sepal.Leng</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_feather</span>(path, <span class="dt">columns =</span> <span class="ot">NULL</span>)</code></pre>
 </div>
 <div id="rio" class="section level2">
-<h2><span class="header-section-number">3.8</span> <code>rio</code> 万能的瑞士军刀</h2>
+<h2><span class="header-section-number">3.8</span> <code>rio</code>–万能的瑞士军刀</h2>
 <p>前面几节介绍读取数据的函数是走马观花，蜻蜓点水的方式，不是故意偷懒，是因为本节内容才是重点，之所以标题将 <code>rio</code> 称之为万能的瑞士军刀，是因为其功能决定的： <code>rio</code> 实际上属于作者对 <code>data.table</code>、<code>haven</code>、<code>readxl</code> 等一系列软件包相关函数的打包，然后将格式的识别自动化，减少了我们的工作量，主要特点为：</p>
 <ul>
 <li><p>使用扩展名来识别文件类型，减少人工输入的工作量，若是格式无法识别，则可以通过指定 format 来导入。</p></li>
@@ -614,7 +617,265 @@ knitr<span class="op">::</span><span class="kw">kable</span>(<span class="kw">he
 <span class="kw">attributes</span>(all_aci)</code></pre>
 <pre><code>## $names
 ## [1] &quot;aci1&quot; &quot;aci2&quot; &quot;aci3&quot;</code></pre>
-<p>如果要进一步处理，参考 <a href="readr.html#riocsv">3.8.2.1</a> 内容</p>
+<p>如果要进一步处理，参考 <a href="readr.html#riocsv">3.8.2.1</a> 内容。</p>
+</div>
+<div id="riotext" class="section level4">
+<h4><span class="header-section-number">3.8.2.3</span> 文本文件的处理</h4>
+<p>以上两种格式常见，但有时我们会遇到其他文本格式的数据，即虽然数据为文本格式，但都带有其他特别的后缀，例如 CR1000 的数据，如果你曾经用文本编辑器打开过 CR1000 的数据，很容易看到他是用逗号分隔的，那么我们看一下 <code>rio</code> 的表现：</p>
+<pre class="sourceCode r"><code class="sourceCode r">crdata &lt;-<span class="st"> </span><span class="kw">import</span>(<span class="st">&quot;./data/weather.dat&quot;</span>, <span class="dt">format =</span> <span class="st">&quot;,&quot;</span>, <span class="dt">skip =</span> <span class="dv">1</span>)
+knitr<span class="op">::</span><span class="kw">kable</span>(<span class="kw">head</span>(crdata))</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">TIMESTAMP</th>
+<th align="left">RECORD</th>
+<th align="left">Batt_volt_Min</th>
+<th align="left">PTemp_C_Max</th>
+<th align="left">SR_Wpm2_Avg</th>
+<th align="left">PAR_umolpm2s_Avg</th>
+<th align="left">NR_uncorrect_Wpm2_Avg</th>
+<th align="left">NR_correct_Wpm2_Avg</th>
+<th align="left">Soil_hf_Wpm2_Avg</th>
+<th align="left">RG_mm_Tot</th>
+<th align="left">TCAir_C_Avg</th>
+<th align="left">RH_Pcent_Avg</th>
+<th align="left">WS_mps_Avg</th>
+<th align="left">WS_gust_mps</th>
+<th align="left">WD_360_Avg</th>
+<th align="left">TCSoil_C_Avg</th>
+<th align="left">VWC_Avg</th>
+<th align="left">Eb_Avg</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">TS</td>
+<td align="left">RN</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">Min</td>
+<td align="left">Max</td>
+<td align="left">Avg</td>
+<td align="left">Avg</td>
+<td align="left">Avg</td>
+<td align="left">Avg</td>
+<td align="left">Avg</td>
+<td align="left">Tot</td>
+<td align="left">Avg</td>
+<td align="left">Avg</td>
+<td align="left">Avg</td>
+<td align="left">Smp</td>
+<td align="left">Avg</td>
+<td align="left">Avg</td>
+<td align="left">Avg</td>
+<td align="left">Avg</td>
+</tr>
+<tr class="odd">
+<td align="left">2018-12-14 16:30:00</td>
+<td align="left">0</td>
+<td align="left">12.84</td>
+<td align="left">6.242</td>
+<td align="left">28.16</td>
+<td align="left">-56.77</td>
+<td align="left">-3.978</td>
+<td align="left">-3.978</td>
+<td align="left">19.54</td>
+<td align="left">0</td>
+<td align="left">3.148</td>
+<td align="left">40.87</td>
+<td align="left">NAN</td>
+<td align="left">0</td>
+<td align="left">0</td>
+<td align="left">0</td>
+<td align="left">NAN</td>
+<td align="left">NAN</td>
+</tr>
+<tr class="even">
+<td align="left">2018-12-14 17:00:00</td>
+<td align="left">1</td>
+<td align="left">12.86</td>
+<td align="left">4.299</td>
+<td align="left">17.75</td>
+<td align="left">64.06</td>
+<td align="left">-3.7</td>
+<td align="left">-3.7</td>
+<td align="left">56.13</td>
+<td align="left">2</td>
+<td align="left">1.623</td>
+<td align="left">50.8</td>
+<td align="left">0.269</td>
+<td align="left">0.13</td>
+<td align="left">204.1</td>
+<td align="left">0.059</td>
+<td align="left">-0.006</td>
+<td align="left">1.761</td>
+</tr>
+<tr class="odd">
+<td align="left">2018-12-14 17:30:00</td>
+<td align="left">2</td>
+<td align="left">12.88</td>
+<td align="left">-0.095</td>
+<td align="left">0.713</td>
+<td align="left">1.433</td>
+<td align="left">-3.044</td>
+<td align="left">-3.044</td>
+<td align="left">26.31</td>
+<td align="left">0</td>
+<td align="left">-0.695</td>
+<td align="left">71.51</td>
+<td align="left">0.195</td>
+<td align="left">0.3</td>
+<td align="left">254.4</td>
+<td align="left">-2.945</td>
+<td align="left">-0.017</td>
+<td align="left">1.28</td>
+</tr>
+<tr class="even">
+<td align="left">2018-12-14 18:00:00</td>
+<td align="left">3</td>
+<td align="left">12.87</td>
+<td align="left">-3.385</td>
+<td align="left">-0.006</td>
+<td align="left">-0.018</td>
+<td align="left">-2.633</td>
+<td align="left">-2.633</td>
+<td align="left">29.05</td>
+<td align="left">0</td>
+<td align="left">-1.993</td>
+<td align="left">82.6</td>
+<td align="left">0.193</td>
+<td align="left">0.12</td>
+<td align="left">231.9</td>
+<td align="left">-3.443</td>
+<td align="left">-0.015</td>
+<td align="left">1.331</td>
+</tr>
+<tr class="odd">
+<td align="left">不太好的情况是，我们导</td>
+<td align="left">入了表头下</td>
+<td align="left">面的一行不需要的</td>
+<td align="left">内容，这个我们</td>
+<td align="left">先忽略，后面再</td>
+<td align="left">处理。</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+<p>对于 LI-840 等 txt 数据，喜欢用空格分列，使用 <code>rio</code> 的效果非常好，直接自动删除了第一个头文件的日期，读取了我测量的数据：</p>
+<pre class="sourceCode r"><code class="sourceCode r">li840 &lt;-<span class="st"> </span><span class="kw">import</span>(<span class="st">&quot;./data/li840.txt&quot;</span>)
+knitr<span class="op">::</span><span class="kw">kable</span>(<span class="kw">head</span>(li840))</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Date(Y-M-D)</th>
+<th align="left">Time(H:M:S)</th>
+<th align="right">CO2(ppm)</th>
+<th align="right">H2O(ppt)</th>
+<th align="right">H2O(C)</th>
+<th align="right">Cell_Temperature(C)</th>
+<th align="right">Cell_Pressure(kPa)</th>
+<th align="right">CO2_Absorption</th>
+<th align="right">H2O_Absorption</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">2017-06-14</td>
+<td align="left">11:07:19</td>
+<td align="right">707.61</td>
+<td align="right">18.76</td>
+<td align="right">16.49</td>
+<td align="right">52.19</td>
+<td align="right">100.37</td>
+<td align="right">0.1328</td>
+<td align="right">0.1067</td>
+</tr>
+<tr class="even">
+<td align="left">2017-06-14</td>
+<td align="left">11:07:20</td>
+<td align="right">707.62</td>
+<td align="right">18.76</td>
+<td align="right">16.49</td>
+<td align="right">52.19</td>
+<td align="right">100.37</td>
+<td align="right">0.1328</td>
+<td align="right">0.1067</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-06-14</td>
+<td align="left">11:07:21</td>
+<td align="right">707.78</td>
+<td align="right">18.77</td>
+<td align="right">16.49</td>
+<td align="right">52.19</td>
+<td align="right">100.35</td>
+<td align="right">0.1328</td>
+<td align="right">0.1067</td>
+</tr>
+<tr class="even">
+<td align="left">2017-06-14</td>
+<td align="left">11:07:22</td>
+<td align="right">707.87</td>
+<td align="right">18.77</td>
+<td align="right">16.50</td>
+<td align="right">52.19</td>
+<td align="right">100.35</td>
+<td align="right">0.1328</td>
+<td align="right">0.1067</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-06-14</td>
+<td align="left">11:07:23</td>
+<td align="right">707.78</td>
+<td align="right">18.77</td>
+<td align="right">16.50</td>
+<td align="right">52.19</td>
+<td align="right">100.35</td>
+<td align="right">0.1328</td>
+<td align="right">0.1067</td>
+</tr>
+<tr class="even">
+<td align="left">2017-06-14</td>
+<td align="left">11:07:24</td>
+<td align="right">707.84</td>
+<td align="right">18.77</td>
+<td align="right">16.50</td>
+<td align="right">52.19</td>
+<td align="right">100.35</td>
+<td align="right">0.1328</td>
+<td align="right">0.1067</td>
+</tr>
+</tbody>
+</table>
 
 
 </div>
@@ -637,7 +898,7 @@ knitr<span class="op">::</span><span class="kw">kable</span>(<span class="kw">he
         </div>
       </div>
 <a href="prerequisites.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="todo.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="rioexport.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

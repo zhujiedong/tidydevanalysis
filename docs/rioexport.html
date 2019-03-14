@@ -5,21 +5,21 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>版权 | 使用 tidyverse 的方式分析仪器测量的数据</title>
-  <meta name="description" content="版权 | 使用 tidyverse 的方式分析仪器测量的数据">
+  <title>第 4 章 使用 rio 导出数据 | 使用 tidyverse 的方式分析仪器测量的数据</title>
+  <meta name="description" content="第 4 章 使用 rio 导出数据 | 使用 tidyverse 的方式分析仪器测量的数据">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="版权 | 使用 tidyverse 的方式分析仪器测量的数据" />
+  <meta property="og:title" content="第 4 章 使用 rio 导出数据 | 使用 tidyverse 的方式分析仪器测量的数据" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="images/coverpage.png" />
-  <meta property="og:description" content="版权 | 使用 tidyverse 的方式分析仪器测量的数据" />
+  <meta property="og:description" content="第 4 章 使用 rio 导出数据 | 使用 tidyverse 的方式分析仪器测量的数据" />
   <meta name="github-repo" content="zhujiedong/tidydevanalysis" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="版权 | 使用 tidyverse 的方式分析仪器测量的数据" />
+  <meta name="twitter:title" content="第 4 章 使用 rio 导出数据 | 使用 tidyverse 的方式分析仪器测量的数据" />
   
-  <meta name="twitter:description" content="版权 | 使用 tidyverse 的方式分析仪器测量的数据" />
+  <meta name="twitter:description" content="第 4 章 使用 rio 导出数据 | 使用 tidyverse 的方式分析仪器测量的数据" />
   <meta name="twitter:image" content="images/coverpage.png" />
 
 <meta name="author" content="祝介东    北京力高泰科技有限公司">
@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="author.html">
-<link rel="next" href="origin-tidyverse.html">
+<link rel="prev" href="readr.html">
+<link rel="next" href="todo.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -186,23 +186,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="copyright" class="section level1 unnumbered">
-<h1>版权</h1>
-<p><strong>本文旨在对使用我公司产品的用户提供一个数据分析的参考，本人或所在公司并未从中获取任何利益，内容错误疏漏之处，欢迎指正。本人保留一切权利，禁止一切将本文内容用于商业用途的行为，禁止商业公司使用。</strong></p>
-
+<div id="rioexport" class="section level1">
+<h1><span class="header-section-number">第 4 章</span> 使用 <code>rio</code> 导出数据</h1>
+<p>与导入数据函数相比，基本上 R 内都有其相对应的导出数据的函数，但为了节省版面，外加这两天培训实在有点累，我们直接进入正题，还是直接进入 “Swiss-Army Knife” 的解决方案：</p>
+<p>如果是导入的数据，那么非常容易解决，例如刚刚导入的 CR1000 的数据：</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">exprot</span>(crdata, <span class="st">&quot;./data/crdata.csv&quot;</span>)</code></pre>
+<p>如果我想导出多个 dataframe，也非常简单：</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">exprot</span>(all_aci, <span class="st">&quot;./data/all_aci.xlsx&quot;</span>)</code></pre>
+<p>也就是第一个参数为多个 dataframe 组成的 list，然后可以将单个 dataframe 导入 excel 不同的 sheet 内。</p>
+<div id="rioconvert" class="section level2">
+<h2><span class="header-section-number">4.1</span> 数据的转换</h2>
+<p><code>rio</code> 数据的转换其实并不奇怪，他是先讲数据导入，然后再导出，目的在于导出，所以我们将它放在了导出数据的内容内。</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">convert</span>(<span class="st">&quot;./data/aci.csv&quot;</span>, <span class="st">&quot;./data/aci.feather&quot;</span>)</code></pre>
+<p><strong>注：转换为 feather 格式，并非耍酷的需要，主要目的有三，一是该格式数据轻量级的，占地方小，二是他是 R 和 python 通用的格式，三是这是二进制格式，文本打开一堆乱码，有一定安全意义</strong>，次要目的是耍酷。</p>
 
 
 </div>
-
-
-
+</div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="author.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="origin-tidyverse.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="readr.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="todo.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -232,7 +239,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/zhujiedong/tidyphotoanalysis/blob/master/00-front.Rmd",
+"link": "https://github.com/zhujiedong/tidyphotoanalysis/blob/master/02-2-1-export.Rmd",
 "text": "缂栬緫"
 },
 "history": {
