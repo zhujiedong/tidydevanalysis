@@ -7,7 +7,7 @@
 
 书归正传，tidyverse 为一些列符合相同设计哲学、语法和数据结构的包的集合，也就是说只要符合这个定义，都可以算作为 tidyverse，不管是不是 tidyverse 已经收录。
 
-本文内容刻意模仿了 [R for Data Science](https://r4ds.had.co.nz/)，如有兴趣，更建议各位直接看原文。
+本文内容刻意模仿了 [R for Data Science](https://r4ds.had.co.nz/) 的风格，如有兴趣，更建议各位直接看原文。
 
 ## tidyverse 的流程 {#tidyworkflow}
 

@@ -25,7 +25,7 @@
 <meta name="author" content="祝介东    北京力高泰科技有限公司">
 
 
-<meta name="date" content="2019-03-14">
+<meta name="date" content="2019-03-20">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -159,11 +159,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4" data-path="rioexport.html"><a href="rioexport.html"><i class="fa fa-check"></i><b>4</b> 使用 <code>rio</code> 导出数据</a><ul>
 <li class="chapter" data-level="4.1" data-path="rioexport.html"><a href="rioexport.html#rioconvert"><i class="fa fa-check"></i><b>4.1</b> 数据的转换</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="todo.html"><a href="todo.html"><i class="fa fa-check"></i><b>5</b> todo</a><ul>
-<li class="chapter" data-level="5.1" data-path="todo.html"><a href="todo.html#data-transformation"><i class="fa fa-check"></i><b>5.1</b> data transformation</a></li>
-<li class="chapter" data-level="5.2" data-path="todo.html"><a href="todo.html#data-visulization"><i class="fa fa-check"></i><b>5.2</b> data visulization</a></li>
-<li class="chapter" data-level="5.3" data-path="todo.html"><a href="todo.html#model-r"><i class="fa fa-check"></i><b>5.3</b> model r</a></li>
-<li class="chapter" data-level="5.4" data-path="todo.html"><a href="todo.html#public"><i class="fa fa-check"></i><b>5.4</b> public</a></li>
+<li class="part"><span><b>III Part III</b></span></li>
+<li class="chapter" data-level="5" data-path="tidydata.html"><a href="tidydata.html"><i class="fa fa-check"></i><b>5</b> 数据的转换</a><ul>
+<li class="chapter" data-level="5.1" data-path="tidydata.html"><a href="tidydata.html#tidyr"><i class="fa fa-check"></i><b>5.1</b> 使用 <code>tidyr</code> 清洁数据</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="tidydata.html"><a href="tidydata.html#gather"><i class="fa fa-check"></i><b>5.1.1</b> <code>gather</code> 用于合并数据集</a></li>
+<li class="chapter" data-level="5.1.2" data-path="tidydata.html"><a href="tidydata.html#spread"><i class="fa fa-check"></i><b>5.1.2</b> <code>spread</code> 用于展开数据集</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="dplyr.html"><a href="dplyr.html"><i class="fa fa-check"></i><b>6</b> <code>dplyr</code>–数据操作的语法</a></li>
+<li class="chapter" data-level="7" data-path="todo.html"><a href="todo.html"><i class="fa fa-check"></i><b>7</b> todo</a><ul>
+<li class="chapter" data-level="7.1" data-path="todo.html"><a href="todo.html#data-transformation"><i class="fa fa-check"></i><b>7.1</b> data transformation</a></li>
+<li class="chapter" data-level="7.2" data-path="todo.html"><a href="todo.html#data-visulization"><i class="fa fa-check"></i><b>7.2</b> data visulization</a></li>
+<li class="chapter" data-level="7.3" data-path="todo.html"><a href="todo.html#model-r"><i class="fa fa-check"></i><b>7.3</b> model r</a></li>
+<li class="chapter" data-level="7.4" data-path="todo.html"><a href="todo.html#public"><i class="fa fa-check"></i><b>7.4</b> public</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>参考文献</a></li>
 <li class="divider"></li>
@@ -190,7 +198,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">第 1 章</span> tidyverse 的起源</h1>
 <p>提到 R，他们创始人的名字估计能讲出来的没那么多，但是 <a href="https://github.com/hadley">Hadley Wickham</a> 绝对是在他发布 <code>ggplot2</code> 成名后，鼎鼎有名的人物。</p>
 <p>书归正传，tidyverse 为一些列符合相同设计哲学、语法和数据结构的包的集合，也就是说只要符合这个定义，都可以算作为 tidyverse，不管是不是 tidyverse 已经收录。</p>
-<p>本文内容刻意模仿了 <a href="https://r4ds.had.co.nz/">R for Data Science</a>，如有兴趣，更建议各位直接看原文。</p>
+<p>本文内容刻意模仿了 <a href="https://r4ds.had.co.nz/">R for Data Science</a> 的风格，如有兴趣，更建议各位直接看原文。</p>
 <div id="tidyworkflow" class="section level2">
 <h2><span class="header-section-number">1.1</span> tidyverse 的流程</h2>
 <p>很多时候，一言以蔽之后面的内容听上去很概括，实际上效果远不如一副图片更清晰和直观，例如图 <a href="origin-tidyverse.html#fig:workflow">1.1</a></p>

@@ -1,0 +1,121 @@
+# (PART) Part III {-} 
+
+# 数据的转换 {#tidydata}
+
+首先，tidyverse 数据的核心为 "tidy data"，所有软件都是要根据这个核心来进行数据处理，或者是将非 "tidy data" 转换为 "tidy data"，那么什么是 "tidy data" 呢？ @jsstidy 对其进行了详细的阐述，核心观点可以参考图 \@ref(fig:tidydata):
+
+```{r, tidydata, fig.cap="图解“tidy data”"}
+url <- "https://d33wubrfki0l68.cloudfront.net/6f1ddb544fc5c69a2478e444ab8112fb0eea23f8/91adc/images/tidy-1.png"
+knitr::include_graphics("url")
+```
+
+用三句话概括：
+
+* 每个变量必须单独成列。
+* 每个观察值必须单独成行。
+* 每个数值必须具有单独的单元格。
+
+拿整理好的光合数据举例，每个测量参数，如 A，Ci 等，都具有单独的列，每个 obs 列代表了一次测量，每次测量都是单独的一行，对应了各个测量的参数，每个单元格只有一个数值，不存在这样表示的单元格, 例如 表头为 “A/Ci”，观测值为 “12/200”。
+
+这样做的优势也是显而易见的：
+
+* 所有数据的存储结构都是一致的，我们调用非常方便，拿到数据后不需要思考，直接调用即可。最重要的，他是 "tidyverse" 以及多数的软件包所支持的格式。
+
+* R 是原生的支持向量化操作的软件，将每个变量单独成列，也就是每个变量都是同一数据类型，本质上就是向量，这样 R 内置的函数都支持这些类型的数据的处理。
+
+## 使用 `tidyr` 清洁数据 {#tidyr}
+
+`tidyr` 核心函数有三个，分别是 `gather()`, `separate()` 以及 `spread()`，主要目的是对数据进行拆分，合并等清洁操作，单独使用是可行的，但最好结合 `dplyr` 来进行操作，会大大的解放我们的生产力，这里我们先不对 `dplyr` 的内容进行介绍，后面 \@ref(dplyr) 再详细介绍。
+
+### `gather` 用于合并数据集 {#gather}
+
+`gather` 用于将多列数据合并为一列，视觉上看上去数据由宽变长，这是它的一个特征，例如我有这样两个数据，按月份测量了光合速率 (表 \@ref(tab:messa)) 和蒸腾速率 (表 \@ref(tab:messe))：
+
+```{r}
+messa <- readRDS("./data/messa.RDS")
+messe <- readRDS("./data/messe.RDS")
+```
+
+```{r, messa, echo=FALSE}
+knitr::kable(messa, booktabs = TRUE,
+caption = '5-6月光合数据')
+```
+
+```{r, messe, echo=FALSE}
+knitr::kable(messe, booktabs = TRUE,
+caption = '5-6月蒸腾数据')
+```
+
+这个数据记录的最大问题是，后面两列都是同一变量，按照原则，二者应为同一列，而不是分为两列，需要合并，`tidyr` 都是 `tidyverse` 的核心包，此时我们只用 `tidyr`：
+
+```{r}
+library(tidyr)
+
+tidya_data <- messa %>%
+  gather(May, Jun, key = "month", value = "A")
+
+tidye_data <- messe %>%
+  gather(May, Jun, key = "month", value = "E")
+```
+
+清洁后数据分别见表 \@ref(tab:messa) 和表 \@ref(tab:messe)。
+
+```{r, tidya, echo=FALSE}
+knitr::kable(tidya_data, booktabs = TRUE,
+caption = '清洁后5-6月光合数据')
+```
+
+```{r, tidye, echo=FALSE}
+knitr::kable(tidye_data, booktabs = TRUE,
+caption = '清洁后5-6月蒸腾数据')
+```
+
+先简单介绍一下 `gather` 怎么实现上述清洁：key 指的是我们原来数据中表头的名字，value 指的是原来数据中的测量值，在本例中 key 为我们不同月份，value 是我们每月测量的光合速率的值。
+如果你留意到了 “%>”，那么恭喜你，你注意到了 `tidyverse` 软件包所支持的一种非常直观的语法，我们称之为管道（pipes），它来自 `magrittr`，跟 linux 语法中的管道意思类似，可以很方便的讲我们符号之前的变量传递给后面的变量，例如：
+
+```{r}
+library(magrittr)
+
+x = 1:1000
+z = sum((mean(diff(x))), x)
+z
+
+z <- x %>%
+  diff() %>% 
+  mean() %>%
+  sum(x)
+z
+```
+当然，在此处的优势不是特别明显,但单从视觉上来看，无疑使用管道符号更为直观，当然，当你知道可以通过 ctr+shift+M 可以直接输入 %>% 时，无疑你会从痛苦和疑惑中解脱。其他优势我们不介绍，后面使用时会很清晰的看到。
+
+
+### `spread` 用于展开数据集 {#spread}
+
+与 `gather` 相对应，`spread` 用于将数据展开，例如我有如表 \@ref(tab:messc) 的数据 messc：
+
+```{r}
+messc <- readRDS("./data/messc.RDS")
+```
+
+```{r, messc, echo=FALSE}
+knitr::kable(messc, booktabs = TRUE,
+caption = '5-6月光合蒸腾数据')
+```
+
+很明显，光合和蒸腾属于两个变量，不应放在一起，`spread` 使用方式同 `gather` 类似，其中 key 指的是 type，value 只的是测量值 measure：
+
+```{r, tidyc}
+tidyc_data <- messc %>% 
+  spread(key=type,value = measure)
+```
+
+```{r, tidyc_data, echo=FALSE}
+knitr::kable(tidyc_data, booktabs = TRUE,
+             caption = '清洁后的5-6月光合蒸腾数据')
+```
+
+
+# `dplyr`--数据操作的语法 {#dplyr}
+
+
+
