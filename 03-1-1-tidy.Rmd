@@ -37,12 +37,12 @@ messe <- readRDS("./data/messe.RDS")
 ```
 
 ```{r, messa, echo=FALSE}
-knitr::kable(messa, booktabs = TRUE,
+knitr::kable(messa, booktabs = TRUE, align = "c",
 caption = '5-6月光合数据')
 ```
 
 ```{r, messe, echo=FALSE}
-knitr::kable(messe, booktabs = TRUE,
+knitr::kable(messe, booktabs = TRUE, align = "c",
 caption = '5-6月蒸腾数据')
 ```
 
@@ -61,12 +61,12 @@ tidye_data <- messe %>%
 清洁后数据分别见表 \@ref(tab:messa) 和表 \@ref(tab:messe)。
 
 ```{r, tidya, echo=FALSE}
-knitr::kable(tidya_data, booktabs = TRUE,
+knitr::kable(tidya_data, booktabs = TRUE, align = "c",
 caption = '清洁后5-6月光合数据')
 ```
 
 ```{r, tidye, echo=FALSE}
-knitr::kable(tidye_data, booktabs = TRUE,
+knitr::kable(tidye_data, booktabs = TRUE, align = "c",
 caption = '清洁后5-6月蒸腾数据')
 ```
 
@@ -98,7 +98,7 @@ messc <- readRDS("./data/messc.RDS")
 ```
 
 ```{r, messc, echo=FALSE}
-knitr::kable(messc, booktabs = TRUE,
+knitr::kable(messc, booktabs = TRUE, align = "c",
 caption = '5-6月光合蒸腾数据')
 ```
 
@@ -110,10 +110,94 @@ tidyc_data <- messc %>%
 ```
 
 ```{r, tidyc_data, echo=FALSE}
-knitr::kable(tidyc_data, booktabs = TRUE,
-             caption = '清洁后的5-6月光合蒸腾数据')
+knitr::kable(tidyc_data, booktabs = TRUE, align = "c",
+  caption = '清洁后的5-6月光合蒸腾数据')
 ```
 
+### `separate` 用于单列数据的分离 {#separate}
+
+对于一些手动记录的调查数据，通常存在的问题就是本该分成两列的数据放在了一列，用了一些符号和空格隔开，例如表 \@ref(tab:srsepc) 数据
+```{r}
+crsep <- readRDS("./data/crseparate.RDS")
+```
+
+```{r, srsepc, echo=FALSE}
+knitr::kable(head(crsep), booktabs = TRUE, align = "c",
+  caption = '未分列的数据')
+```
+
+时间和日期如果是分开的，对于我们处理起来比较方便，机箱的电池电压和温度同样，不应在一列：
+
+```{r}
+crnor <- crsep %>% 
+  separate(date, into = c("date", "time"), sep = " ") %>% 
+  separate(volt_ptemp, into = c("batt_v", "ptemp"))
+```
+
+注意，我们只有第一次分列使用了 `sep=` 参数，原因是 `separate` 默认使用非字母数字分隔。日期和时间中存在了非字母数字的符号，所以我们制定使用空格分列，而对于后面的数据，没有其他非字母数字的符号存在，整理后数据如 \@ref(tab:crnor) 所示。
+
+```{r, crnor, echo=FALSE}
+knitr::kable(head(crnor), booktabs = TRUE, align = "c",
+  caption = '分列处理后的数据')
+```
+
+此时我们需要注意的是，如果我们看一下整理好后的数据类型：
+
+```{r}
+str(crnor)
+```
+
+我们发现这些类型的识别是不符合实际的，但我们可以使用 `separate` 方便的进行转换：
+
+```{r}
+crnor <- crsep %>% 
+  separate(date, into = c("date", "time"), sep = " ", convert = TRUE) %>% 
+  separate(volt_ptemp, into = c("batt_v", "ptemp"), convert = TRUE)
+str(crnor)
+```
+
+时间和日期的格式还是不对，不过这不影响大局，格式转换也不是 `tidyr` 的所擅长的内容，我们后面介绍 `dplyr` 时再介绍。
+
+还有就是 `sep` 除了可以设置字符类型外，还可以设置为整数，这样可以方便的按给定的位数分隔字符，例如下面的时间日期写法，如果放在一列，是很不方便的，但它没有分隔符号：
+
+```{r}
+messdt <- tibble::tibble(dt=c("198508181311", "198609191412", "198710101513" ))
+messdt %>% separate(dt, into = c("date", "time"), sep = "8", convert = TRUE)
+messdt %>% separate(dt, into = c("date", "time"), sep = 8, convert = TRUE)
+```
+上面的例子告诉我们，使用 `sep` 分隔数据时，千万注意利用位置分列时，不要加引号，因为它把 “8” 当作了分隔符号。
+
+### `unite` 整合不同的列 {#unite}
+
+`unite` 作用和 `separate`
+
+恰恰相反，在实际应用过程中不是很常见，但有句话说得好，“书到用时方恨少”，类似的，函数到用时，如果没有，也会给我们带来额外的工作量，例如我有三个小区，每个小区测量三个植株，每个植株测量三个叶片的光合速率，如表 \@ref(tab:sampleid) 所示：
+
+```{r}
+sampleid <- data.frame(
+  plot = rep(1:3, each = 3, times = 3 ),
+  plant = rep(1:3, each = 9),
+  leaf = rep(1:3, 9),
+  A = rnorm(27, 20, 2 )
+)
+```
+```{r, sampleid, echo=FALSE}
+knitr::kable(head(sampleid), booktabs = TRUE, align = "c",
+  caption = '整合前数据的样式（未完全显示）')
+```
+
+但我们在处理数据的时候，通常只需要一列来区分不同来源的参数，整理完成如表 \@ref(tab:tidy_smp)  的样式更符合 tidy data 的要求：
+
+```{r}
+tidy_smp <- sampleid %>% 
+  unite(treatment, plot, plant, leaf, sep = "-")
+```
+```{r, tidy_smp, echo=FALSE}
+knitr::kable(head(tidy_smp), booktabs = TRUE, align = "c",
+  caption = '整合三列后数据的样式（未完全显示）')
+```
+
+整合时可以自定义连接的符号，例如我们做不同处理通常喜欢用上面的显示方式，当然如果特殊需求不喜欢用符号，可以直接设置为 `sep = ""`。
 
 # `dplyr`--数据操作的语法 {#dplyr}
 

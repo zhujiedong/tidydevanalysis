@@ -25,7 +25,7 @@
 <meta name="author" content="祝介东    北京力高泰科技有限公司">
 
 
-<meta name="date" content="2019-03-20">
+<meta name="date" content="2019-03-21">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -164,6 +164,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.1" data-path="tidydata.html"><a href="tidydata.html#tidyr"><i class="fa fa-check"></i><b>5.1</b> 使用 <code>tidyr</code> 清洁数据</a><ul>
 <li class="chapter" data-level="5.1.1" data-path="tidydata.html"><a href="tidydata.html#gather"><i class="fa fa-check"></i><b>5.1.1</b> <code>gather</code> 用于合并数据集</a></li>
 <li class="chapter" data-level="5.1.2" data-path="tidydata.html"><a href="tidydata.html#spread"><i class="fa fa-check"></i><b>5.1.2</b> <code>spread</code> 用于展开数据集</a></li>
+<li class="chapter" data-level="5.1.3" data-path="tidydata.html"><a href="tidydata.html#separate"><i class="fa fa-check"></i><b>5.1.3</b> <code>separate</code> 用于单列数据的分离</a></li>
+<li class="chapter" data-level="5.1.4" data-path="tidydata.html"><a href="tidydata.html#unite"><i class="fa fa-check"></i><b>5.1.4</b> <code>unite</code> 整合不同的列</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="dplyr.html"><a href="dplyr.html"><i class="fa fa-check"></i><b>6</b> <code>dplyr</code>–数据操作的语法</a></li>
@@ -229,31 +231,31 @@ messe &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class=
 <caption><span id="tab:messa">表 5.1: </span>5-6月光合数据</caption>
 <thead>
 <tr class="header">
-<th align="left">species</th>
-<th align="right">May</th>
-<th align="right">Jun</th>
+<th align="center">species</th>
+<th align="center">May</th>
+<th align="center">Jun</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">wheat</td>
-<td align="right">20.61053</td>
-<td align="right">30.90637</td>
+<td align="center">wheat</td>
+<td align="center">20.61053</td>
+<td align="center">30.90637</td>
 </tr>
 <tr class="even">
-<td align="left">wheat</td>
-<td align="right">20.18174</td>
-<td align="right">29.39688</td>
+<td align="center">wheat</td>
+<td align="center">20.18174</td>
+<td align="center">29.39688</td>
 </tr>
 <tr class="odd">
-<td align="left">corn</td>
-<td align="right">17.94135</td>
-<td align="right">14.65996</td>
+<td align="center">corn</td>
+<td align="center">17.94135</td>
+<td align="center">14.65996</td>
 </tr>
 <tr class="even">
-<td align="left">corn</td>
-<td align="right">17.81593</td>
-<td align="right">14.06745</td>
+<td align="center">corn</td>
+<td align="center">17.81593</td>
+<td align="center">14.06745</td>
 </tr>
 </tbody>
 </table>
@@ -261,31 +263,31 @@ messe &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class=
 <caption><span id="tab:messe">表 5.2: </span>5-6月蒸腾数据</caption>
 <thead>
 <tr class="header">
-<th align="left">species</th>
-<th align="right">May</th>
-<th align="right">Jun</th>
+<th align="center">species</th>
+<th align="center">May</th>
+<th align="center">Jun</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">wheat</td>
-<td align="right">0.0303354</td>
-<td align="right">0.0501694</td>
+<td align="center">wheat</td>
+<td align="center">0.0303354</td>
+<td align="center">0.0501694</td>
 </tr>
 <tr class="even">
-<td align="left">wheat</td>
-<td align="right">0.0299274</td>
-<td align="right">0.0501956</td>
+<td align="center">wheat</td>
+<td align="center">0.0299274</td>
+<td align="center">0.0501956</td>
 </tr>
 <tr class="odd">
-<td align="left">corn</td>
-<td align="right">0.0348524</td>
-<td align="right">0.0039654</td>
+<td align="center">corn</td>
+<td align="center">0.0348524</td>
+<td align="center">0.0039654</td>
 </tr>
 <tr class="even">
-<td align="left">corn</td>
-<td align="right">0.0350129</td>
-<td align="right">0.0039123</td>
+<td align="center">corn</td>
+<td align="center">0.0350129</td>
+<td align="center">0.0039123</td>
 </tr>
 </tbody>
 </table>
@@ -302,51 +304,51 @@ tidye_data &lt;-<span class="st"> </span>messe <span class="op">%&gt;%</span>
 <caption><span id="tab:tidya">表 5.3: </span>清洁后5-6月光合数据</caption>
 <thead>
 <tr class="header">
-<th align="left">species</th>
-<th align="left">month</th>
-<th align="right">A</th>
+<th align="center">species</th>
+<th align="center">month</th>
+<th align="center">A</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">wheat</td>
-<td align="left">May</td>
-<td align="right">20.61053</td>
+<td align="center">wheat</td>
+<td align="center">May</td>
+<td align="center">20.61053</td>
 </tr>
 <tr class="even">
-<td align="left">wheat</td>
-<td align="left">May</td>
-<td align="right">20.18174</td>
+<td align="center">wheat</td>
+<td align="center">May</td>
+<td align="center">20.18174</td>
 </tr>
 <tr class="odd">
-<td align="left">corn</td>
-<td align="left">May</td>
-<td align="right">17.94135</td>
+<td align="center">corn</td>
+<td align="center">May</td>
+<td align="center">17.94135</td>
 </tr>
 <tr class="even">
-<td align="left">corn</td>
-<td align="left">May</td>
-<td align="right">17.81593</td>
+<td align="center">corn</td>
+<td align="center">May</td>
+<td align="center">17.81593</td>
 </tr>
 <tr class="odd">
-<td align="left">wheat</td>
-<td align="left">Jun</td>
-<td align="right">30.90637</td>
+<td align="center">wheat</td>
+<td align="center">Jun</td>
+<td align="center">30.90637</td>
 </tr>
 <tr class="even">
-<td align="left">wheat</td>
-<td align="left">Jun</td>
-<td align="right">29.39688</td>
+<td align="center">wheat</td>
+<td align="center">Jun</td>
+<td align="center">29.39688</td>
 </tr>
 <tr class="odd">
-<td align="left">corn</td>
-<td align="left">Jun</td>
-<td align="right">14.65996</td>
+<td align="center">corn</td>
+<td align="center">Jun</td>
+<td align="center">14.65996</td>
 </tr>
 <tr class="even">
-<td align="left">corn</td>
-<td align="left">Jun</td>
-<td align="right">14.06745</td>
+<td align="center">corn</td>
+<td align="center">Jun</td>
+<td align="center">14.06745</td>
 </tr>
 </tbody>
 </table>
@@ -354,51 +356,51 @@ tidye_data &lt;-<span class="st"> </span>messe <span class="op">%&gt;%</span>
 <caption><span id="tab:tidye">表 5.4: </span>清洁后5-6月蒸腾数据</caption>
 <thead>
 <tr class="header">
-<th align="left">species</th>
-<th align="left">month</th>
-<th align="right">E</th>
+<th align="center">species</th>
+<th align="center">month</th>
+<th align="center">E</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">wheat</td>
-<td align="left">May</td>
-<td align="right">0.0303354</td>
+<td align="center">wheat</td>
+<td align="center">May</td>
+<td align="center">0.0303354</td>
 </tr>
 <tr class="even">
-<td align="left">wheat</td>
-<td align="left">May</td>
-<td align="right">0.0299274</td>
+<td align="center">wheat</td>
+<td align="center">May</td>
+<td align="center">0.0299274</td>
 </tr>
 <tr class="odd">
-<td align="left">corn</td>
-<td align="left">May</td>
-<td align="right">0.0348524</td>
+<td align="center">corn</td>
+<td align="center">May</td>
+<td align="center">0.0348524</td>
 </tr>
 <tr class="even">
-<td align="left">corn</td>
-<td align="left">May</td>
-<td align="right">0.0350129</td>
+<td align="center">corn</td>
+<td align="center">May</td>
+<td align="center">0.0350129</td>
 </tr>
 <tr class="odd">
-<td align="left">wheat</td>
-<td align="left">Jun</td>
-<td align="right">0.0501694</td>
+<td align="center">wheat</td>
+<td align="center">Jun</td>
+<td align="center">0.0501694</td>
 </tr>
 <tr class="even">
-<td align="left">wheat</td>
-<td align="left">Jun</td>
-<td align="right">0.0501956</td>
+<td align="center">wheat</td>
+<td align="center">Jun</td>
+<td align="center">0.0501956</td>
 </tr>
 <tr class="odd">
-<td align="left">corn</td>
-<td align="left">Jun</td>
-<td align="right">0.0039654</td>
+<td align="center">corn</td>
+<td align="center">Jun</td>
+<td align="center">0.0039654</td>
 </tr>
 <tr class="even">
-<td align="left">corn</td>
-<td align="left">Jun</td>
-<td align="right">0.0039123</td>
+<td align="center">corn</td>
+<td align="center">Jun</td>
+<td align="center">0.0039123</td>
 </tr>
 </tbody>
 </table>
@@ -433,60 +435,60 @@ z</code></pre>
 <caption><span id="tab:messc">表 5.5: </span>5-6月光合蒸腾数据</caption>
 <thead>
 <tr class="header">
-<th align="left">species</th>
-<th align="left">month</th>
-<th align="left">type</th>
-<th align="right">measure</th>
+<th align="center">species</th>
+<th align="center">month</th>
+<th align="center">type</th>
+<th align="center">measure</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">wheat</td>
-<td align="left">May</td>
-<td align="left">A</td>
-<td align="right">20.3393647</td>
+<td align="center">wheat</td>
+<td align="center">May</td>
+<td align="center">A</td>
+<td align="center">20.3393647</td>
 </tr>
 <tr class="even">
-<td align="left">wheat</td>
-<td align="left">May</td>
-<td align="left">E</td>
-<td align="right">0.0299543</td>
+<td align="center">wheat</td>
+<td align="center">May</td>
+<td align="center">E</td>
+<td align="center">0.0299543</td>
 </tr>
 <tr class="odd">
-<td align="left">wheat</td>
-<td align="left">Jun</td>
-<td align="left">A</td>
-<td align="right">20.0542329</td>
+<td align="center">wheat</td>
+<td align="center">Jun</td>
+<td align="center">A</td>
+<td align="center">20.0542329</td>
 </tr>
 <tr class="even">
-<td align="left">wheat</td>
-<td align="left">Jun</td>
-<td align="left">E</td>
-<td align="right">0.0398827</td>
+<td align="center">wheat</td>
+<td align="center">Jun</td>
+<td align="center">E</td>
+<td align="center">0.0398827</td>
 </tr>
 <tr class="odd">
-<td align="left">corn</td>
-<td align="left">May</td>
-<td align="left">A</td>
-<td align="right">30.2665086</td>
+<td align="center">corn</td>
+<td align="center">May</td>
+<td align="center">A</td>
+<td align="center">30.2665086</td>
 </tr>
 <tr class="even">
-<td align="left">corn</td>
-<td align="left">May</td>
-<td align="left">E</td>
-<td align="right">0.0498585</td>
+<td align="center">corn</td>
+<td align="center">May</td>
+<td align="center">E</td>
+<td align="center">0.0498585</td>
 </tr>
 <tr class="odd">
-<td align="left">corn</td>
-<td align="left">Jun</td>
-<td align="left">A</td>
-<td align="right">30.1753295</td>
+<td align="center">corn</td>
+<td align="center">Jun</td>
+<td align="center">A</td>
+<td align="center">30.1753295</td>
 </tr>
 <tr class="even">
-<td align="left">corn</td>
-<td align="left">Jun</td>
-<td align="left">E</td>
-<td align="right">0.0549767</td>
+<td align="center">corn</td>
+<td align="center">Jun</td>
+<td align="center">E</td>
+<td align="center">0.0549767</td>
 </tr>
 </tbody>
 </table>
@@ -497,39 +499,268 @@ z</code></pre>
 <caption>(#tab:tidyc_data)清洁后的5-6月光合蒸腾数据</caption>
 <thead>
 <tr class="header">
-<th align="left">species</th>
-<th align="left">month</th>
-<th align="right">A</th>
-<th align="right">E</th>
+<th align="center">species</th>
+<th align="center">month</th>
+<th align="center">A</th>
+<th align="center">E</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">corn</td>
-<td align="left">Jun</td>
-<td align="right">30.17533</td>
-<td align="right">0.0549767</td>
+<td align="center">corn</td>
+<td align="center">Jun</td>
+<td align="center">30.17533</td>
+<td align="center">0.0549767</td>
 </tr>
 <tr class="even">
-<td align="left">corn</td>
-<td align="left">May</td>
-<td align="right">30.26651</td>
-<td align="right">0.0498585</td>
+<td align="center">corn</td>
+<td align="center">May</td>
+<td align="center">30.26651</td>
+<td align="center">0.0498585</td>
 </tr>
 <tr class="odd">
-<td align="left">wheat</td>
-<td align="left">Jun</td>
-<td align="right">20.05423</td>
-<td align="right">0.0398827</td>
+<td align="center">wheat</td>
+<td align="center">Jun</td>
+<td align="center">20.05423</td>
+<td align="center">0.0398827</td>
 </tr>
 <tr class="even">
-<td align="left">wheat</td>
-<td align="left">May</td>
-<td align="right">20.33936</td>
-<td align="right">0.0299543</td>
+<td align="center">wheat</td>
+<td align="center">May</td>
+<td align="center">20.33936</td>
+<td align="center">0.0299543</td>
 </tr>
 </tbody>
 </table>
+</div>
+<div id="separate" class="section level3">
+<h3><span class="header-section-number">5.1.3</span> <code>separate</code> 用于单列数据的分离</h3>
+<p>对于一些手动记录的调查数据，通常存在的问题就是本该分成两列的数据放在了一列，用了一些符号和空格隔开，例如表 <a href="tidydata.html#tab:srsepc">5.6</a> 数据</p>
+<pre class="sourceCode r"><code class="sourceCode r">crsep &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st">&quot;./data/crseparate.RDS&quot;</span>)</code></pre>
+<table>
+<caption><span id="tab:srsepc">表 5.6: </span>未分列的数据</caption>
+<thead>
+<tr class="header">
+<th align="center">date</th>
+<th align="center">volt_ptemp</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">2018/5/19 11:00</td>
+<td align="center">14/26</td>
+</tr>
+<tr class="even">
+<td align="center">2018/5/19 11:30</td>
+<td align="center">14/27</td>
+</tr>
+<tr class="odd">
+<td align="center">2018/5/19 12:00</td>
+<td align="center">14/28</td>
+</tr>
+<tr class="even">
+<td align="center">2018/5/19 12:30</td>
+<td align="center">14/28</td>
+</tr>
+<tr class="odd">
+<td align="center">2018/5/19 13:00</td>
+<td align="center">14/28</td>
+</tr>
+<tr class="even">
+<td align="center">2018/5/19 13:30</td>
+<td align="center">14/28</td>
+</tr>
+</tbody>
+</table>
+<p>时间和日期如果是分开的，对于我们处理起来比较方便，机箱的电池电压和温度同样，不应在一列：</p>
+<pre class="sourceCode r"><code class="sourceCode r">crnor &lt;-<span class="st"> </span>crsep <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">separate</span>(date, <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;date&quot;</span>, <span class="st">&quot;time&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">separate</span>(volt_ptemp, <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;batt_v&quot;</span>, <span class="st">&quot;ptemp&quot;</span>))</code></pre>
+<p>注意，我们只有第一次分列使用了 <code>sep=</code> 参数，原因是 <code>separate</code> 默认使用非字母数字分隔。日期和时间中存在了非字母数字的符号，所以我们制定使用空格分列，而对于后面的数据，没有其他非字母数字的符号存在，整理后数据如 <a href="tidydata.html#tab:crnor">5.7</a> 所示。</p>
+<table>
+<caption><span id="tab:crnor">表 5.7: </span>分列处理后的数据</caption>
+<thead>
+<tr class="header">
+<th align="center">date</th>
+<th align="center">time</th>
+<th align="center">batt_v</th>
+<th align="center">ptemp</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">2018/5/19</td>
+<td align="center">11:00</td>
+<td align="center">14</td>
+<td align="center">26</td>
+</tr>
+<tr class="even">
+<td align="center">2018/5/19</td>
+<td align="center">11:30</td>
+<td align="center">14</td>
+<td align="center">27</td>
+</tr>
+<tr class="odd">
+<td align="center">2018/5/19</td>
+<td align="center">12:00</td>
+<td align="center">14</td>
+<td align="center">28</td>
+</tr>
+<tr class="even">
+<td align="center">2018/5/19</td>
+<td align="center">12:30</td>
+<td align="center">14</td>
+<td align="center">28</td>
+</tr>
+<tr class="odd">
+<td align="center">2018/5/19</td>
+<td align="center">13:00</td>
+<td align="center">14</td>
+<td align="center">28</td>
+</tr>
+<tr class="even">
+<td align="center">2018/5/19</td>
+<td align="center">13:30</td>
+<td align="center">14</td>
+<td align="center">28</td>
+</tr>
+</tbody>
+</table>
+<p>此时我们需要注意的是，如果我们看一下整理好后的数据类型：</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(crnor)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    15 obs. of  4 variables:
+##  $ date  : chr  &quot;2018/5/19&quot; &quot;2018/5/19&quot; &quot;2018/5/19&quot; &quot;2018/5/19&quot; ...
+##  $ time  : chr  &quot;11:00&quot; &quot;11:30&quot; &quot;12:00&quot; &quot;12:30&quot; ...
+##  $ batt_v: chr  &quot;14&quot; &quot;14&quot; &quot;14&quot; &quot;14&quot; ...
+##  $ ptemp : chr  &quot;26&quot; &quot;27&quot; &quot;28&quot; &quot;28&quot; ...</code></pre>
+<p>我们发现这些类型的识别是不符合实际的，但我们可以使用 <code>separate</code> 方便的进行转换：</p>
+<pre class="sourceCode r"><code class="sourceCode r">crnor &lt;-<span class="st"> </span>crsep <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">separate</span>(date, <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;date&quot;</span>, <span class="st">&quot;time&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>, <span class="dt">convert =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">separate</span>(volt_ptemp, <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;batt_v&quot;</span>, <span class="st">&quot;ptemp&quot;</span>), <span class="dt">convert =</span> <span class="ot">TRUE</span>)
+<span class="kw">str</span>(crnor)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    15 obs. of  4 variables:
+##  $ date  : chr  &quot;2018/5/19&quot; &quot;2018/5/19&quot; &quot;2018/5/19&quot; &quot;2018/5/19&quot; ...
+##  $ time  : chr  &quot;11:00&quot; &quot;11:30&quot; &quot;12:00&quot; &quot;12:30&quot; ...
+##  $ batt_v: int  14 14 14 14 14 14 14 14 14 14 ...
+##  $ ptemp : int  26 27 28 28 28 28 29 30 31 31 ...</code></pre>
+<p>时间和日期的格式还是不对，不过这不影响大局，格式转换也不是 <code>tidyr</code> 的所擅长的内容，我们后面介绍 <code>dplyr</code> 时再介绍。</p>
+<p>还有就是 <code>sep</code> 除了可以设置字符类型外，还可以设置为整数，这样可以方便的按给定的位数分隔字符，例如下面的时间日期写法，如果放在一列，是很不方便的，但它没有分隔符号：</p>
+<pre class="sourceCode r"><code class="sourceCode r">messdt &lt;-<span class="st"> </span>tibble<span class="op">::</span><span class="kw">tibble</span>(<span class="dt">dt=</span><span class="kw">c</span>(<span class="st">&quot;198508181311&quot;</span>, <span class="st">&quot;198609191412&quot;</span>, <span class="st">&quot;198710101513&quot;</span> ))
+messdt <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">separate</span>(dt, <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;date&quot;</span>, <span class="st">&quot;time&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot;8&quot;</span>, <span class="dt">convert =</span> <span class="ot">TRUE</span>)</code></pre>
+<pre><code>## Warning: Expected 2 pieces. Additional pieces discarded in 1 rows [1].</code></pre>
+<pre><code>## # A tibble: 3 x 2
+##    date      time
+##   &lt;int&gt;     &lt;int&gt;
+## 1    19        50
+## 2    19 609191412
+## 3    19 710101513</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">messdt <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">separate</span>(dt, <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;date&quot;</span>, <span class="st">&quot;time&quot;</span>), <span class="dt">sep =</span> <span class="dv">8</span>, <span class="dt">convert =</span> <span class="ot">TRUE</span>)</code></pre>
+<pre><code>## # A tibble: 3 x 2
+##       date  time
+##      &lt;int&gt; &lt;int&gt;
+## 1 19850818  1311
+## 2 19860919  1412
+## 3 19871010  1513</code></pre>
+<p>上面的例子告诉我们，使用 <code>sep</code> 分隔数据时，千万注意利用位置分列时，不要加引号，因为它把 “8” 当作了分隔符号。</p>
+</div>
+<div id="unite" class="section level3">
+<h3><span class="header-section-number">5.1.4</span> <code>unite</code> 整合不同的列</h3>
+<p><code>unite</code> 作用和 <code>separate</code></p>
+<p>恰恰相反，在实际应用过程中不是很常见，但有句话说得好，“书到用时方恨少”，类似的，函数到用时，如果没有，也会给我们带来额外的工作量，例如我有三个小区，每个小区测量三个植株，每个植株测量三个叶片的光合速率，如表 <a href="tidydata.html#tab:sampleid">5.8</a> 所示：</p>
+<pre class="sourceCode r"><code class="sourceCode r">sampleid &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
+  <span class="dt">plot =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">each =</span> <span class="dv">3</span>, <span class="dt">times =</span> <span class="dv">3</span> ),
+  <span class="dt">plant =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">each =</span> <span class="dv">9</span>),
+  <span class="dt">leaf =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">9</span>),
+  <span class="dt">A =</span> <span class="kw">rnorm</span>(<span class="dv">27</span>, <span class="dv">20</span>, <span class="dv">2</span> )
+)</code></pre>
+<table>
+<caption><span id="tab:sampleid">表 5.8: </span>整合前数据的样式（未完全显示）</caption>
+<thead>
+<tr class="header">
+<th align="center">plot</th>
+<th align="center">plant</th>
+<th align="center">leaf</th>
+<th align="center">A</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">19.43561</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">2</td>
+<td align="center">17.93471</td>
+</tr>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">3</td>
+<td align="center">20.94253</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">15.42295</td>
+</tr>
+<tr class="odd">
+<td align="center">2</td>
+<td align="center">1</td>
+<td align="center">2</td>
+<td align="center">20.61723</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">1</td>
+<td align="center">3</td>
+<td align="center">18.77323</td>
+</tr>
+</tbody>
+</table>
+<p>但我们在处理数据的时候，通常只需要一列来区分不同来源的参数，整理完成如表 @ref(tab:tidy_smp) 的样式更符合 tidy data 的要求：</p>
+<pre class="sourceCode r"><code class="sourceCode r">tidy_smp &lt;-<span class="st"> </span>sampleid <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">unite</span>(treatment, plot, plant, leaf, <span class="dt">sep =</span> <span class="st">&quot;-&quot;</span>)</code></pre>
+<table>
+<caption>(#tab:tidy_smp)整合三列后数据的样式（未完全显示）</caption>
+<thead>
+<tr class="header">
+<th align="center">treatment</th>
+<th align="center">A</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1-1-1</td>
+<td align="center">19.43561</td>
+</tr>
+<tr class="even">
+<td align="center">1-1-2</td>
+<td align="center">17.93471</td>
+</tr>
+<tr class="odd">
+<td align="center">1-1-3</td>
+<td align="center">20.94253</td>
+</tr>
+<tr class="even">
+<td align="center">2-1-1</td>
+<td align="center">15.42295</td>
+</tr>
+<tr class="odd">
+<td align="center">2-1-2</td>
+<td align="center">20.61723</td>
+</tr>
+<tr class="even">
+<td align="center">2-1-3</td>
+<td align="center">18.77323</td>
+</tr>
+</tbody>
+</table>
+<p>整合时可以自定义连接的符号，例如我们做不同处理通常喜欢用上面的显示方式，当然如果特殊需求不喜欢用符号，可以直接设置为 <code>sep = ""</code>。</p>
 </div>
 </div>
 </div>
