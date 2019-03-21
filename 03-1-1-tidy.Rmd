@@ -4,9 +4,9 @@
 
 首先，tidyverse 数据的核心为 "tidy data"，所有软件都是要根据这个核心来进行数据处理，或者是将非 "tidy data" 转换为 "tidy data"，那么什么是 "tidy data" 呢？ @jsstidy 对其进行了详细的阐述，核心观点可以参考图 \@ref(fig:tidydata):
 
-```{r, tidydata, fig.cap="图解“tidy data”"}
+```{r, tidydata, echo=FALSE, fig.cap="图解 tidy data "}
 url <- "https://d33wubrfki0l68.cloudfront.net/6f1ddb544fc5c69a2478e444ab8112fb0eea23f8/91adc/images/tidy-1.png"
-knitr::include_graphics("url")
+knitr::include_graphics(path = url)
 ```
 
 用三句话概括：
